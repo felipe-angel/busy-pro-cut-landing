@@ -101,12 +101,21 @@ function initForm() {
     status.textContent = 'Sending…';
     success.classList.add('hidden');
 
-    const formData = new FormData(form);
+    const payload = {
+      name: form.name?.value?.trim() || '',
+      email: form.email?.value?.trim() || '',
+      consent: form.consent?.checked || false,
+      subject: form.querySelector('input[name="subject"]')?.value || 'Busy Pro Starter Kit Request',
+    };
+
     try {
       const res = await fetch(form.action || EMAIL_ENDPOINT, {
         method: form.method || 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Network error');
       const data = await res.json().catch(() => ({}));
