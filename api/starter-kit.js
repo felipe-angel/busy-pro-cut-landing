@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -34,7 +36,7 @@ module.exports = async function handler(req, res) {
       </ul>
     `;
 
-    const payload = {
+    const notifyPayload = {
       from: fromEmail,
       to: [notifyToEmail],
       subject: subject || 'New Busy Pro Starter Kit Signup',
@@ -42,20 +44,36 @@ module.exports = async function handler(req, res) {
       text: `New Busy Pro Starter Kit Signup\nName: ${name}\nEmail: ${email}\nConsent: ${consent ? 'Yes' : 'No'}`,
     };
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const text = await response.text();
-      console.error('Resend API error:', text);
-      return res.status(502).json({ success: false, message: 'Email send failed' });
+    // Build subscriber email with attachment
+    const pdfPath = path.join(process.cwd(), 'kit', 'busy-pro-starter-kit.pdf');
+    let attachment = null;
+    try {
+      const fileBuf = fs.readFileSync(pdfPath);
+      attachment = {
+        filename: 'Busy Pro Starter Kit.pdf',
+        content: fileBuf.toString('base64'),
+      };
+    } catch (e) {
+      console.warn('Could not read PDF for attachment:', e?.message || e);
     }
+
+    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/busy-pro-starter-kit.pdf`;
+    const welcomeHtml = `
+      <p>Here is your Busy Pro Starter Kit. The PDF is attached.</p>
+      <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
+      <p>— Angel Coaching</p>
+    `;
+    const welcomePayload = {
+      from: fromEmail,
+      to: [email],
+      subject: 'Your Busy Pro Starter Kit',
+      html: welcomeHtml,
+      text: `Here is your Busy Pro Starter Kit. Download: ${publicUrl}`,
+      attachments: attachment ? [attachment] : undefined,
+    };
+
+    await sendResendEmail(resendApiKey, welcomePayload);
+    await sendResendEmail(resendApiKey, notifyPayload);
 
     return res.status(200).json({ success: true });
   } catch (error) {
@@ -86,6 +104,21 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+async function sendResendEmail(apiKey, payload) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Resend error: ${text}`);
+  }
 }
 
 
