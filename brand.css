@@ -151,9 +151,14 @@ body {
 .accordion-button {
   width: 100%;
   text-align: left;
-  padding: 0.75rem 0;
+  padding: 0.9rem 0;
   font-weight: 600;
-  color: rgb(15 23 42);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .accordion-button:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent); }
-.accordion-panel { padding: 0.5rem 0 1rem 0; color: rgb(71 85 105); }
+.accordion-button[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
+.accordion-icon { transition: transform 150ms ease; color: var(--muted-ink); }
+.accordion-panel { padding: 0.5rem 0 1rem 0; color: var(--muted-ink); }
