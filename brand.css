@@ -1,10 +1,23 @@
 :root {
   --accent: #0ea5e9; /* sky-500 */
   --accent-600: #0284c7; /* sky-600 */
+  --accent-700: #0369a1; /* sky-700 */
+  --ink: #0f172a;       /* slate-900 */
+  --muted-ink: #475569; /* slate-600 */
+  --surface: #ffffff;
+  --surface-2: #f8fafc; /* slate-50 */
   --ring: 2px solid var(--accent);
 }
 
 html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+
+/* Subtle background to make the page feel alive */
+body {
+  background:
+    radial-gradient(1200px 800px at 85% -10%, rgba(14,165,233,0.18), rgba(14,165,233,0) 55%),
+    radial-gradient(900px 600px at -10% 30%, rgba(2,132,199,0.12), rgba(2,132,199,0) 50%),
+    var(--surface);
+}
 
 /***** Components *****/
 .btn {
@@ -23,32 +36,50 @@ html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe 
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent);
 }
 .btn-primary {
-  background-color: var(--accent);
+  background-image: linear-gradient(135deg, var(--accent), var(--accent-600));
   color: #fff;
+  box-shadow: 0 10px 18px -8px rgba(2, 132, 199, 0.45), 0 1px 3px rgba(2, 132, 199, 0.25);
 }
-.btn-primary:hover { background-color: var(--accent-600); }
+.btn-primary:hover {
+  background-image: linear-gradient(135deg, var(--accent-600), var(--accent-700));
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); }
 
 .btn-ghost {
   background: transparent;
-  color: rgb(15 23 42);
-  border: 1px solid rgb(226 232 240);
+  color: var(--ink);
+  border: 1px solid rgba(2, 6, 23, 0.08);
 }
 .btn-ghost:hover {
-  background-color: rgb(248 250 252);
+  background-color: rgba(14, 165, 233, 0.06);
+  border-color: rgba(14, 165, 233, 0.25);
 }
 
 .card {
   background-color: #fff;
-  border: 1px solid rgb(226 232 240);
+  border: 1px solid rgba(2, 6, 23, 0.06);
   border-radius: 0.75rem;
   padding: 1rem;
+  box-shadow: 0 1px 2px rgba(2, 6, 23, 0.03), 0 8px 24px rgba(2, 6, 23, 0.06);
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
 }
+.card:hover { transform: translateY(-2px); box-shadow: 0 2px 6px rgba(2,6,23,0.06), 0 14px 32px rgba(2,6,23,0.12); border-color: rgba(2,6,23,0.12); }
 
 .section { padding: 3rem 0; }
 .section-inner { margin-left: auto; margin-right: auto; max-width: 80rem; padding-left: 1rem; padding-right: 1rem; }
-.section-title { font-size: 1.5rem; font-weight: 700; color: rgb(15 23 42); }
+.section-title { font-size: 1.625rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 9999px;
+  margin-top: 10px;
+  background-image: linear-gradient(90deg, var(--accent), var(--accent-600));
+}
 
-.nav-link { color: rgb(71 85 105); }
+.nav-link { color: var(--muted-ink); }
 .nav-link:hover { color: rgb(15 23 42); }
 
 .guarantee {
@@ -61,8 +92,8 @@ html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe 
 .badge {
   display: inline-block;
   border-radius: 9999px;
-  background-color: rgb(241 245 249);
-  color: rgb(15 23 42);
+  background-color: rgba(2, 132, 199, 0.08);
+  color: var(--ink);
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;
 }
@@ -70,7 +101,7 @@ html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe 
 .label { display: block; font-size: 0.875rem; color: rgb(71 85 105); margin-bottom: 0.25rem; }
 .input {
   width: 100%;
-  border: 1px solid rgb(226 232 240);
+  border: 1px solid rgba(2, 6, 23, 0.08);
   border-radius: 0.5rem;
   padding: 0.625rem 0.75rem;
   color: rgb(15 23 42);
@@ -100,7 +131,20 @@ html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe 
 .skip-link:focus { transform: translateY(0); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent); }
 
 /* Header shadow on scroll */
-#site-header.is-scrolled { box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06); }
+#site-header.is-scrolled { box-shadow: 0 1px 2px rgba(2,6,23,0.04), 0 12px 32px rgba(2,6,23,0.08); background: rgba(255,255,255,0.9); }
+
+/* Hero: subtle gradients */
+#hero {
+  background:
+    radial-gradient(1000px 600px at 80% -10%, rgba(14,165,233,0.18), transparent 60%),
+    radial-gradient(800px 500px at -10% 40%, rgba(2,132,199,0.12), transparent 55%);
+}
+
+/* Light tint for slate-50 sections */
+.bg-slate-50 {
+  background:
+    linear-gradient(180deg, rgba(2,132,199,0.05), rgba(2,132,199,0.02) 40%, rgba(2,132,199,0.00));
+}
 
 /* Accordion */
 .accordion-item { padding: 0.5rem 1rem; }
