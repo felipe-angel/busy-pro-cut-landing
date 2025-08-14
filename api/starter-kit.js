@@ -46,12 +46,12 @@ module.exports = async function handler(req, res) {
     };
 
     // Build subscriber email with attachment
-    const pdfPath = path.join(process.cwd(), 'kit', 'busy-pro-starter-kit.pdf');
+    const pdfPath = path.join(process.cwd(), 'kit', 'fat-loss-starter-kit.pdf');
     let attachment = null;
     try {
       const fileBuf = fs.readFileSync(pdfPath);
       attachment = {
-        filename: 'Busy Pro Starter Kit.pdf',
+        filename: 'Fat Loss Starter Kit.pdf',
         content: fileBuf.toString('base64'),
       };
     } catch (e) {
