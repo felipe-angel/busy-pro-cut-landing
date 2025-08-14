@@ -1,6 +1,6 @@
 // Global Config (placeholders)
-const CALENDAR_URL = 'https://calendly.com/fangel0608/30min';
-const STRIPE_CORE_URL = 'https://buy.stripe.com/4gM14ofs24kggqG5Y0cfK02';
+const CALENDAR_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeJ5qWw4iaDnkkNeC3mc_7ENr1qFnpOBm2LWKzsc7LoPqdQsQ/viewform?usp=dialog';
+const STRIPE_CORE_URL = CALENDAR_URL;
 const EMAIL_ENDPOINT = 'https://api.web3forms.com/submit'; // placeholder
 
 function openExternal(url) {
@@ -8,7 +8,7 @@ function openExternal(url) {
 }
 
 function bindCTAButtons() {
-  const ids = ['header-audit-btn', 'mobile-audit-btn', 'hero-primary-cta', 'cta-audit-btn', 'mobile-sticky-cta'];
+  const ids = ['header-audit-btn', 'mobile-audit-btn', 'hero-primary-cta', 'cta-audit-btn', 'mobile-sticky-cta', 'pricing-apply-btn'];
   ids.forEach((id) => {
     const el = document.getElementById(id);
     if (el) {

@@ -42,11 +42,12 @@
     "brand": {"@type": "Brand", "name": "Angel Coaching"},
     "description": "Lose 15–25 lbs in 12 Weeks — Even with a Busy Schedule.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       "priceCurrency": "USD",
-      "price": "79.99",
+      "lowPrice": "79.99",
+      "highPrice": "150",
       "availability": "https://schema.org/InStock",
-      "url": "https://buy.stripe.com/4gM14ofs24kggqG5Y0cfK02"
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSeJ5qWw4iaDnkkNeC3mc_7ENr1qFnpOBm2LWKzsc7LoPqdQsQ/viewform?usp=dialog"
     }
   }
   </script>
@@ -70,8 +71,8 @@
           <a class="nav-link" href="#outcomes">Outcomes</a>
           <a class="nav-link" href="#method">Method</a>
           <a class="nav-link" href="#pricing">Pricing</a>
-          <a class="nav-link" href="#faq">FAQ</a>
-          <button id="header-audit-btn" class="btn btn-primary ml-2" type="button">Book Free Audit</button>
+           <a class="nav-link" href="#faq">FAQ</a>
+           <button id="header-audit-btn" class="btn btn-primary ml-2" type="button">Apply for 1–1 Coaching</button>
         </nav>
         <button id="mobile-menu-button" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -85,7 +86,7 @@
           <a class="nav-link py-2" href="#method">Method</a>
           <a class="nav-link py-2" href="#pricing">Pricing</a>
           <a class="nav-link py-2" href="#faq">FAQ</a>
-          <button id="mobile-audit-btn" class="btn btn-primary mt-1" type="button">Book Free Audit</button>
+          <button id="mobile-audit-btn" class="btn btn-primary mt-1" type="button">Apply for 1–1 Coaching</button>
         </div>
       </div>
     </div>
@@ -99,7 +100,7 @@
           <p class="mt-2 text-base sm:text-lg text-slate-500">(Only an Angel could do it)</p>
           <p class="mt-1 text-xs sm:text-sm text-slate-500">(Even with a Busy Schedule)</p>
           <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a id="hero-primary-cta" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Book Your Free 15-Minute Audit</a>
+            <a id="hero-primary-cta" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Apply for 1–1 Coaching</a>
             <a class="btn btn-ghost" href="#lead-magnet">Get the Fat Loss Starter Kit (Free)</a>
           </div>
           <p class="mt-6 text-xs uppercase tracking-wide text-slate-500">Science-led • Results-driven</p>
@@ -168,7 +169,7 @@
         <div class="mt-6 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div class="card flex flex-col justify-between">
             <div>
-              <h3 class="text-lg font-semibold text-slate-900">Executive Cut Accelerator — $79.99/mo • 12 weeks</h3>
+              <h3 class="text-lg font-semibold text-slate-900">Executive Cut Accelerator — $79.99–$150/mo • 3–6 months</h3>
               <ul class="mt-3 list-disc pl-5 text-slate-700 space-y-1">
                 <li>Personalized macros & weekly adjustments</li>
                 <li>3–4 day strength plan (30–45 min)</li>
@@ -178,7 +179,7 @@
               </ul>
             </div>
             <div class="mt-4">
-              <a id="pricing-stripe-btn" class="btn btn-primary w-full" href="#" target="_blank" rel="noopener noreferrer">Start Executive Cut Accelerator</a>
+              <a id="pricing-apply-btn" class="btn btn-primary w-full" href="#" target="_blank" rel="noopener noreferrer">Apply for 1–1 Coaching</a>
             </div>
           </div>
           <div class="md:col-span-2 lg:col-span-2">
@@ -261,7 +262,7 @@
         <h2 class="section-title">Ready for a Plan That Fits Your Life?</h2>
         <p class="mt-2 text-slate-600">Book your free 15-minute Audit and I’ll map your 12-week plan.</p>
         <div class="mt-6">
-          <a id="cta-audit-btn" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Book Free Audit</a>
+          <a id="cta-audit-btn" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Apply for 1–1 Coaching</a>
         </div>
       </div>
     </section>
@@ -326,7 +327,7 @@
 
   <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white md:hidden">
     <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6">
-      <button id="mobile-sticky-cta" class="btn btn-primary w-full" type="button">Book Free Audit</button>
+      <button id="mobile-sticky-cta" class="btn btn-primary w-full" type="button">Apply for 1–1 Coaching</button>
     </div>
   </div>
 
