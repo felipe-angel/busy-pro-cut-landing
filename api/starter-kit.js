@@ -13,8 +13,8 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ success: false, message: 'Invalid JSON body' });
   }
 
-  const { name, email, consent, subject } = body || {};
-  if (!name || !email) {
+  const { name, email, phone, consent, subject } = body || {};
+  if (!name || !email || !phone) {
     return res.status(400).json({ success: false, message: 'Missing required fields' });
   }
 
@@ -32,6 +32,7 @@ module.exports = async function handler(req, res) {
       <ul>
         <li><strong>Name:</strong> ${escapeHtml(name)}</li>
         <li><strong>Email:</strong> ${escapeHtml(email)}</li>
+        <li><strong>Phone:</strong> ${escapeHtml(phone)}</li>
         <li><strong>Consent:</strong> ${consent ? 'Yes' : 'No'}</li>
       </ul>
     `;
@@ -41,7 +42,7 @@ module.exports = async function handler(req, res) {
       to: [notifyToEmail],
       subject: subject || 'New Busy Pro Starter Kit Signup',
       html,
-      text: `New Busy Pro Starter Kit Signup\nName: ${name}\nEmail: ${email}\nConsent: ${consent ? 'Yes' : 'No'}`,
+      text: `New Busy Pro Starter Kit Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
     };
 
     // Build subscriber email with attachment

@@ -104,6 +104,7 @@ function initForm() {
     const payload = {
       name: form.name?.value?.trim() || '',
       email: form.email?.value?.trim() || '',
+      phone: form.phone?.value?.trim() || '',
       consent: form.consent?.checked || false,
       subject: form.querySelector('input[name="subject"]')?.value || 'Busy Pro Starter Kit Request',
     };
