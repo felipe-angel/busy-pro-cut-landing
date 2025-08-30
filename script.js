@@ -8,7 +8,7 @@ function openExternal(url) {
 }
 
 function bindCTAButtons() {
-  const ids = ['header-audit-btn', 'mobile-audit-btn', 'hero-primary-cta', 'cta-audit-btn', 'mobile-sticky-cta', 'pricing-apply-btn'];
+  const ids = ['header-audit-btn', 'mobile-audit-btn', 'hero-primary-cta', 'cta-audit-btn', 'mobile-sticky-cta', 'pricing-apply-btn', 'pricing-apply-silver', 'pricing-apply-gold', 'pricing-apply-platinum'];
   ids.forEach((id) => {
     const el = document.getElementById(id);
     if (el) {
