@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
     }
 
     const html = `
-      <h2>New Busy Pro Starter Kit Signup</h2>
+      <h2>New Fat Loss Blueprint Signup</h2>
       <ul>
         <li><strong>Name:</strong> ${escapeHtml(name)}</li>
         <li><strong>Email:</strong> ${escapeHtml(email)}</li>
@@ -40,36 +40,36 @@ module.exports = async function handler(req, res) {
     const notifyPayload = {
       from: fromEmail,
       to: [notifyToEmail],
-      subject: subject || 'New Busy Pro Starter Kit Signup',
+      subject: subject || 'New Fat Loss Blueprint Signup',
       html,
-      text: `New Busy Pro Starter Kit Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
+      text: `New Fat Loss Blueprint Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
     };
 
     // Build subscriber email with attachment
-    const pdfPath = path.join(process.cwd(), 'kit', 'fat-loss-starter-kit.pdf');
+    const pdfPath = path.join(process.cwd(), 'kit', 'angels-fitness-blueprint.pdf');
     let attachment = null;
     try {
       const fileBuf = fs.readFileSync(pdfPath);
       attachment = {
-        filename: 'Fat Loss Starter Kit.pdf',
+        filename: 'Angel\'s Fitness Blueprint.pdf',
         content: fileBuf.toString('base64'),
       };
     } catch (e) {
       console.warn('Could not read PDF for attachment:', e?.message || e);
     }
 
-    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/busy-pro-starter-kit.pdf`;
+    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/angels-fitness-blueprint.pdf`;
     const welcomeHtml = `
-      <p>Here is your Busy Pro Starter Kit. The PDF is attached.</p>
+      <p>Here is your Fat Loss Blueprint. The PDF is attached.</p>
       <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
       <p>— Angel Coaching</p>
     `;
     const welcomePayload = {
       from: fromEmail,
       to: [email],
-      subject: 'Your Busy Pro Starter Kit',
+      subject: 'Your Fat Loss Blueprint',
       html: welcomeHtml,
-      text: `Here is your Busy Pro Starter Kit. Download: ${publicUrl}`,
+      text: `Here is your Fat Loss Blueprint. Download: ${publicUrl}`,
       attachments: attachment ? [attachment] : undefined,
     };
 
