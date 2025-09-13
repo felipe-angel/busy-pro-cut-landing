@@ -18,16 +18,14 @@
     tailwind.config = { theme: { extend: { screens: { 'xs': '420px' } } } }
   </script>
 
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9BEFXBGF1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    
-    // Check for consent before initializing GA
-    if (localStorage.getItem('ga-consent') === 'granted') {
-      gtag('config', 'G-Y9BEFXBGF1');
-    }
+
+    gtag('config', 'G-Y9BEFXBGF1');
   </script>
 
   <script type="application/ld+json">
@@ -388,19 +386,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Cookie Consent Banner -->
-  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 text-white p-4 hidden">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-      <div class="flex-1">
-        <p class="text-sm">We use cookies to analyze site usage and improve your experience. By continuing, you consent to our use of cookies.</p>
-      </div>
-      <div class="flex gap-2">
-        <button id="cookie-accept" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded">Accept</button>
-        <button id="cookie-decline" class="px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white text-sm rounded">Decline</button>
-      </div>
-    </div>
-  </div>
 
   <footer class="border-t border-slate-200 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
