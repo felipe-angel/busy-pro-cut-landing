@@ -46,19 +46,19 @@ module.exports = async function handler(req, res) {
     };
 
     // Build subscriber email with attachment
-    const pdfPath = path.join(process.cwd(), 'kit', 'angels-fitness-blueprint.pdf');
+    const pdfPath = path.join(process.cwd(), 'kit', 'fat-loss-blueprint.pdf');
     let attachment = null;
     try {
       const fileBuf = fs.readFileSync(pdfPath);
       attachment = {
-        filename: 'Angel\'s Fitness Blueprint.pdf',
+        filename: 'Fat Loss Blueprint.pdf',
         content: fileBuf.toString('base64'),
       };
     } catch (e) {
       console.warn('Could not read PDF for attachment:', e?.message || e);
     }
 
-    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/angels-fitness-blueprint.pdf`;
+    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/fat-loss-blueprint.pdf`;
     const welcomeHtml = `
       <p>Here is your Fat Loss Blueprint. The PDF is attached.</p>
       <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
