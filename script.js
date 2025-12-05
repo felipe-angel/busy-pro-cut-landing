@@ -106,7 +106,7 @@ function initForm() {
       email: form.email?.value?.trim() || '',
       phone: form.phone?.value?.trim() || '',
       consent: form.consent?.checked || false,
-      subject: form.querySelector('input[name="subject"]')?.value || 'Busy Pro Starter Kit Request',
+      subject: form.querySelector('input[name="subject"]')?.value || 'Workout Routine Request',
     };
 
     try {
@@ -130,34 +130,6 @@ function initForm() {
   });
 }
 
-function initCookieConsent() {
-  const banner = document.getElementById('cookie-banner');
-  const acceptBtn = document.getElementById('cookie-accept');
-  const declineBtn = document.getElementById('cookie-decline');
-  
-  if (!banner || !acceptBtn || !declineBtn) return;
-  
-  // Show banner if no consent decision has been made
-  if (!localStorage.getItem('ga-consent')) {
-    banner.classList.remove('hidden');
-  }
-  
-  acceptBtn.addEventListener('click', () => {
-    localStorage.setItem('ga-consent', 'granted');
-    banner.classList.add('hidden');
-    
-    // Initialize GA4 if not already done
-    if (typeof gtag === 'function') {
-      gtag('config', 'G-Y9BEFXBGF1');
-    }
-  });
-  
-  declineBtn.addEventListener('click', () => {
-    localStorage.setItem('ga-consent', 'denied');
-    banner.classList.add('hidden');
-  });
-}
-
 function init() {
   bindCTAButtons();
   enableSmoothAnchors();
@@ -165,7 +137,6 @@ function init() {
   headerShadowOnScroll();
   initAccordion();
   initForm();
-  initCookieConsent();
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
     }
 
     const html = `
-      <h2>New Fat Loss Blueprint Signup</h2>
+      <h2>New Workout Routine Signup</h2>
       <ul>
         <li><strong>Name:</strong> ${escapeHtml(name)}</li>
         <li><strong>Email:</strong> ${escapeHtml(email)}</li>
@@ -40,36 +40,36 @@ module.exports = async function handler(req, res) {
     const notifyPayload = {
       from: fromEmail,
       to: [notifyToEmail],
-      subject: subject || 'New Fat Loss Blueprint Signup',
+      subject: subject || 'New Workout Routine Signup',
       html,
-      text: `New Fat Loss Blueprint Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
+      text: `New Workout Routine Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
     };
 
     // Build subscriber email with attachment
-    const pdfPath = path.join(process.cwd(), 'kit', 'fat-loss-blueprint.pdf');
+    const pdfPath = path.join(process.cwd(), 'kit', 'workout-routine.pdf');
     let attachment = null;
     try {
       const fileBuf = fs.readFileSync(pdfPath);
       attachment = {
-        filename: 'Fat Loss Blueprint.pdf',
+        filename: 'My-Workout-Routine-6-Day-Split.pdf',
         content: fileBuf.toString('base64'),
       };
     } catch (e) {
       console.warn('Could not read PDF for attachment:', e?.message || e);
     }
 
-    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/fat-loss-blueprint.pdf`;
+    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/workout-routine.pdf`;
     const welcomeHtml = `
-      <p>Here is your Fat Loss Blueprint. The PDF is attached.</p>
+      <p>Here is your free workout routine. The PDF is attached.</p>
       <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
       <p>— Angel Coaching</p>
     `;
     const welcomePayload = {
       from: fromEmail,
       to: [email],
-      subject: 'Your Fat Loss Blueprint',
+      subject: 'Your Free Workout Routine',
       html: welcomeHtml,
-      text: `Here is your Fat Loss Blueprint. Download: ${publicUrl}`,
+      text: `Here is your free workout routine. Download: ${publicUrl}`,
       attachments: attachment ? [attachment] : undefined,
     };
 
