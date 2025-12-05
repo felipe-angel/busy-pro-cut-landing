@@ -8,25 +8,7 @@ function openExternal(url) {
 }
 
 function bindCTAButtons() {
-  const ids = ['header-audit-btn', 'mobile-audit-btn', 'hero-primary-cta', 'cta-audit-btn', 'mobile-sticky-cta', 'pricing-apply-btn', 'pricing-apply-silver', 'pricing-apply-gold', 'pricing-apply-platinum'];
-  ids.forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        openExternal(CALENDAR_URL);
-        const ctaSection = document.getElementById('cta');
-        if (ctaSection) ctaSection.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-  });
-  const stripeBtn = document.getElementById('pricing-stripe-btn');
-  if (stripeBtn) {
-    stripeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openExternal(STRIPE_CORE_URL);
-    });
-  }
+  // Remove old CTA button bindings since we're not using them anymore
 }
 
 function enableSmoothAnchors() {
@@ -91,22 +73,22 @@ function initAccordion() {
 }
 
 function initForm() {
-  const form = document.getElementById('starter-kit-form');
+  const form = document.getElementById('free-workout-form') || document.getElementById('starter-kit-form');
   if (!form) return;
   const status = document.getElementById('form-status');
   const success = document.getElementById('form-success');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    status.textContent = 'Sending…';
-    success.classList.add('hidden');
+    if (status) status.textContent = 'Sending…';
+    if (success) success.classList.add('hidden');
 
     const payload = {
-      name: form.name?.value?.trim() || '',
-      email: form.email?.value?.trim() || '',
+      name: form.name?.value?.trim() || form.querySelector('#first-name')?.value?.trim() || '',
+      email: form.email?.value?.trim() || form.querySelector('#email')?.value?.trim() || '',
       phone: form.phone?.value?.trim() || '',
-      consent: form.consent?.checked || false,
-      subject: form.querySelector('input[name="subject"]')?.value || 'Workout Routine Request',
+      consent: form.consent?.checked || true,
+      subject: form.querySelector('input[name="subject"]')?.value || 'Free 6-Day Workout Program Request',
     };
 
     try {
@@ -121,11 +103,14 @@ function initForm() {
       if (!res.ok) throw new Error('Network error');
       const data = await res.json().catch(() => ({}));
       if (data && data.success === false) throw new Error('API error');
-      status.textContent = '';
-      success.classList.remove('hidden');
+      if (status) status.textContent = '';
+      if (success) {
+        success.classList.remove('hidden');
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       form.reset();
     } catch (err) {
-      status.textContent = 'Something went wrong. Please try again.';
+      if (status) status.textContent = 'Something went wrong. Please try again.';
     }
   });
 }

@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
   }
 
   const { name, email, phone, consent, subject } = body || {};
-  if (!name || !email || !phone) {
+  if (!name || !email) {
     return res.status(400).json({ success: false, message: 'Missing required fields' });
   }
 
@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
       <ul>
         <li><strong>Name:</strong> ${escapeHtml(name)}</li>
         <li><strong>Email:</strong> ${escapeHtml(email)}</li>
-        <li><strong>Phone:</strong> ${escapeHtml(phone)}</li>
+        ${phone ? `<li><strong>Phone:</strong> ${escapeHtml(phone)}</li>` : ''}
         <li><strong>Consent:</strong> ${consent ? 'Yes' : 'No'}</li>
       </ul>
     `;
@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
       to: [notifyToEmail],
       subject: subject || 'New Workout Routine Signup',
       html,
-      text: `New Workout Routine Signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nConsent: ${consent ? 'Yes' : 'No'}`,
+      text: `New Workout Routine Signup\nName: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ''}\nConsent: ${consent ? 'Yes' : 'No'}`,
     };
 
     // Build subscriber email with attachment
@@ -60,16 +60,17 @@ module.exports = async function handler(req, res) {
 
     const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/workout-routine.pdf`;
     const welcomeHtml = `
-      <p>Here is your free workout routine. The PDF is attached.</p>
+      <p>Here is your free 6-day workout program. The PDF is attached.</p>
       <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
+      <p>This is my exact 6-day split designed to build strength and muscle with focused, low-volume, high-quality sets.</p>
       <p>— Angel Coaching</p>
     `;
     const welcomePayload = {
       from: fromEmail,
       to: [email],
-      subject: 'Your Free Workout Routine',
+      subject: 'Your Free 6-Day Workout Program',
       html: welcomeHtml,
-      text: `Here is your free workout routine. Download: ${publicUrl}`,
+      text: `Here is your free 6-day workout program. Download: ${publicUrl}`,
       attachments: attachment ? [attachment] : undefined,
     };
 
