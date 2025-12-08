@@ -2,6 +2,9 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/thank-you", "destination": "/thank-you.html" }
   ]
 }
 

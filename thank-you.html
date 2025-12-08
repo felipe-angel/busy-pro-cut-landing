@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You for Your Purchase — Angel Coaching</title>
+  <meta name="description" content="Download your purchased blueprint and start your transformation journey." />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/brand.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { screens: { 'xs': '420px' } } } }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9BEFXBGF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9BEFXBGF1');
+  </script>
+
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    html:focus-within { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html:focus-within { scroll-behavior: auto; } }
+  </style>
+</head>
+<body id="top" class="min-h-screen bg-white text-slate-800 antialiased">
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-slate-200">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="text-lg font-bold text-slate-900">Angel Coaching</a>
+        <a href="/" class="btn btn-ghost text-sm">Back to Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-16">
+    <section class="section">
+      <div class="section-inner">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mb-4">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Thank You for Your Purchase!</h1>
+            <p class="text-slate-600">Your order has been confirmed. Download your blueprint(s) below.</p>
+          </div>
+
+          <div id="download-section" class="card mb-6">
+            <h2 class="text-xl font-bold text-slate-900 mb-4">Your Downloads</h2>
+            <div id="download-links" class="space-y-4">
+              <!-- Download links will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="card bg-slate-50">
+            <h3 class="font-semibold text-slate-900 mb-2">What's Next?</h3>
+            <ul class="space-y-2 text-slate-700 text-sm">
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>You'll also receive an email confirmation with download links</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>Download links are valid indefinitely - save them for future reference</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-accent mr-2">•</span>
+                <span>If you have any questions, reach out to us anytime</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 text-center">
+            <a href="/" class="btn btn-primary">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="text-center text-sm text-slate-600">
+        <p>&copy; 2025 Angel Coaching. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Parse URL parameter to determine which product was purchased
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product');
+
+    const products = {
+      'training': {
+        name: 'Training Blueprint',
+        files: [
+          { name: 'Training Blueprint', url: '/blueprints/Angel-Coaching-Training-Blueprint.pdf' }
+        ]
+      },
+      'fat-loss': {
+        name: 'Fat Loss Blueprint',
+        files: [
+          { name: 'Fat Loss Blueprint', url: '/blueprints/FAT-LOSS-BLUEPRINT.pdf' }
+        ]
+      },
+      'bundle': {
+        name: 'Complete Bundle',
+        files: [
+          { name: 'Training Blueprint', url: '/blueprints/Angel-Coaching-Training-Blueprint.pdf' },
+          { name: 'Fat Loss Blueprint', url: '/blueprints/FAT-LOSS-BLUEPRINT.pdf' }
+        ]
+      }
+    };
+
+    const downloadSection = document.getElementById('download-links');
+    
+    if (product && products[product]) {
+      const productData = products[product];
+      productData.files.forEach((file, index) => {
+        const linkDiv = document.createElement('div');
+        linkDiv.className = 'flex items-center justify-between p-4 bg-white border border-slate-200 rounded-lg';
+        linkDiv.innerHTML = `
+          <div class="flex-1">
+            <h3 class="font-semibold text-slate-900 mb-1">${file.name}</h3>
+            <p class="text-sm text-slate-600">PDF Document</p>
+          </div>
+          <a href="${file.url}" download class="btn btn-primary ml-4">
+            Download
+          </a>
+        `;
+        downloadSection.appendChild(linkDiv);
+      });
+    } else {
+      // Invalid or missing product parameter
+      downloadSection.innerHTML = `
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <p class="text-amber-800">Unable to determine which product you purchased. Please contact support if you need assistance.</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
+
