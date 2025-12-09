@@ -85,3 +85,4 @@ Vercel will automatically deploy the changes.
 - **Webhook not working**: Check `STRIPE_WEBHOOK_SECRET` and `STRIPE_SECRET_KEY` in Vercel environment variables
 - **Wrong product on thank you page**: Verify success URLs in Stripe Payment Link settings match the pattern above
 
+

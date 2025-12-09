@@ -4,9 +4,7 @@ const EMAIL_ENDPOINT = '/api/starter-kit';
 
 // Stripe Payment Links
 const STRIPE_LINKS = {
-  training: 'https://buy.stripe.com/28EbJ23Jk9EAgqGdqscfK0g', // $49.99
-  fatLoss: 'https://buy.stripe.com/9B6cN6cfQ6so6Q6fyAcfK0f',   // $49.99
-  bundle: 'https://buy.stripe.com/6oU9AU3Jk3gc4HY5Y0cfK0h'     // $79.99
+  bundle: 'https://buy.stripe.com/6oU9AU3Jk3gc4HY5Y0cfK0h'     // $25 - Update this with your new Stripe link
 };
 
 // Success URL base - customers will be redirected here after payment
@@ -125,38 +123,10 @@ function initForm() {
 }
 
 function initStripeButtons() {
-  // Training Blueprint button
-  const trainingBtn = document.querySelector('[data-product="training"]');
-  if (trainingBtn) {
-    if (STRIPE_LINKS.training !== 'YOUR_TRAINING_BLUEPRINT_STRIPE_LINK_HERE') {
-      trainingBtn.href = STRIPE_LINKS.training;
-      trainingBtn.removeAttribute('onclick');
-    } else {
-      trainingBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Payment link not configured yet. Please contact support.');
-      });
-    }
-  }
-
-  // Fat Loss Blueprint button
-  const fatLossBtn = document.querySelector('[data-product="fat-loss"]');
-  if (fatLossBtn) {
-    if (STRIPE_LINKS.fatLoss !== 'YOUR_FAT_LOSS_BLUEPRINT_STRIPE_LINK_HERE') {
-      fatLossBtn.href = STRIPE_LINKS.fatLoss;
-      fatLossBtn.removeAttribute('onclick');
-    } else {
-      fatLossBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Payment link not configured yet. Please contact support.');
-      });
-    }
-  }
-
   // Bundle button
   const bundleBtn = document.querySelector('[data-product="bundle"]');
   if (bundleBtn) {
-    if (STRIPE_LINKS.bundle !== 'YOUR_BUNDLE_STRIPE_LINK_HERE') {
+    if (STRIPE_LINKS.bundle && STRIPE_LINKS.bundle !== 'YOUR_BUNDLE_STRIPE_LINK_HERE') {
       bundleBtn.href = STRIPE_LINKS.bundle;
       bundleBtn.removeAttribute('onclick');
     } else {
@@ -179,3 +149,4 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
