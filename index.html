@@ -77,63 +77,104 @@
 
   <main id="main" tabindex="-1" class="outline-none">
     <!-- Hero Section -->
-    <section id="hero" class="relative isolate scroll-mt-24">
-      <div class="mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 md:pt-20 md:pb-16 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <div class="mb-8 flex items-start justify-center gap-4 sm:gap-6">
-            <figure class="w-32 h-48 sm:w-48 sm:h-64 md:w-56 md:h-80 overflow-hidden rounded-xl border-2 border-slate-200 bg-white shadow-lg">
-              <img src="/images/before.png" alt="Before transformation" class="w-full h-full object-cover" loading="lazy" />
-              <figcaption class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-50">Before</figcaption>
-            </figure>
-            <figure class="w-32 h-48 sm:w-48 sm:h-64 md:w-56 md:h-80 overflow-hidden rounded-xl border-2 border-slate-200 bg-white shadow-lg">
-              <img src="/images/after.jpg" alt="After transformation" class="w-full h-full object-cover" loading="lazy" />
-              <figcaption class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-50">After</figcaption>
-            </figure>
-          </div>
-          <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl leading-tight">Transform your physique — Only an Angel could do it</h1>
-          <p class="mt-2 text-sm sm:text-base text-slate-600 font-medium">(Even with a Busy Schedule)</p>
-          
-          <div class="mt-10">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">Free 6-Day Workout Plan for Busy Adults Who Want to Get Lean & Strong</h2>
-            <p class="mt-5 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">My exact 6-day split designed to build strength and muscle with focused, low-volume, high-quality sets—no 2-hour workouts required.</p>
-            
-            <ul class="mt-8 text-left max-w-2xl mx-auto space-y-3 text-slate-700">
-              <li class="flex items-start">
-                <span class="text-accent mr-3 text-xl font-bold">✓</span>
-                <span class="text-base sm:text-lg">Chest, back, shoulders, arms, and legs hit twice per week</span>
+    <section id="hero" class="relative isolate overflow-hidden scroll-mt-24">
+      <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-slate-50"></div>
+      <div class="absolute -left-10 top-10 h-64 w-64 rounded-full bg-sky-100 blur-3xl opacity-60"></div>
+      <div class="absolute -right-24 -top-16 h-72 w-72 rounded-full bg-sky-200 blur-[120px] opacity-50"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 md:pt-20 md:pb-16 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[1.15fr_0.95fr] items-center">
+          <!-- Left Column -->
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200/80 backdrop-blur">
+              <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+              Free 6-Day Workout Plan
+            </div>
+            <div class="space-y-3">
+              <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.05]">
+                Lean, strong results for busy adults.
+              </h1>
+              <p class="text-lg sm:text-xl text-slate-600">
+                Transform your physique — Only an Angel could do it. <span class="text-slate-500 text-base">(Even with a busy schedule)</span>
+              </p>
+            </div>
+
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-xl font-bold">✓</span>
+                <span class="text-base sm:text-lg">6-day split hitting every muscle group twice for fast, balanced progress</span>
               </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-3 text-xl font-bold">✓</span>
-                <span class="text-base sm:text-lg">Focus on heavy compounds + key accessories, 5–10 rep ranges</span>
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-xl font-bold">✓</span>
+                <span class="text-base sm:text-lg">Heavy compounds + focused accessories (5–10 reps) without 2-hour sessions</span>
               </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-3 text-xl font-bold">✓</span>
-                <span class="text-base sm:text-lg">Built for strength, muscle, and time efficiency</span>
+              <li class="flex items-start gap-3">
+                <span class="text-accent text-xl font-bold">✓</span>
+                <span class="text-base sm:text-lg">Built for real life: travel, dinners out, and tight schedules included</span>
               </li>
             </ul>
 
-            <!-- CTA Form -->
-            <form id="free-workout-form" class="mt-10 max-w-md mx-auto" action="/api/starter-kit" method="POST" novalidate>
-              <input type="hidden" name="subject" value="Free 6-Day Workout Program Request" />
-              <div class="space-y-4">
-                <div>
-                  <label for="first-name" class="label text-left">First name</label>
-                  <input id="first-name" name="name" type="text" class="input" placeholder="Your first name" autocomplete="given-name" required />
-                </div>
-                <div>
-                  <label for="email" class="label text-left">Email</label>
-                  <input id="email" name="email" type="email" class="input" placeholder="you@example.com" autocomplete="email" required />
-                </div>
-                <button type="submit" class="btn btn-primary w-full">Send Me the Free 6-Day Program</button>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm font-semibold text-slate-800">
+              <div class="rounded-lg bg-white/80 px-4 py-3 shadow-sm ring-1 ring-slate-200/80 backdrop-blur">
+                <div class="text-xs text-slate-500">Time per session</div>
+                <div class="text-lg">30–60 min</div>
               </div>
-              <p class="mt-4 text-sm text-slate-500" id="form-status" role="status" aria-live="polite"></p>
-              <div id="form-success" class="mt-4 hidden rounded-md border border-emerald-200 bg-emerald-50 p-3 text-emerald-800 text-sm">
+              <div class="rounded-lg bg-white/80 px-4 py-3 shadow-sm ring-1 ring-slate-200/80 backdrop-blur">
+                <div class="text-xs text-slate-500">Split</div>
+                <div class="text-lg">6-day push/pull/legs</div>
+              </div>
+              <div class="rounded-lg bg-white/80 px-4 py-3 shadow-sm ring-1 ring-slate-200/80 backdrop-blur sm:col-span-1 col-span-2">
+                <div class="text-xs text-slate-500">Goal</div>
+                <div class="text-lg">Stronger, leaner, efficient</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="card relative overflow-hidden bg-white/90 backdrop-blur">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <div class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                Transformation snapshot
+              </div>
+              <span class="badge bg-accent text-white">Free</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <figure class="overflow-hidden rounded-lg border border-slate-200 shadow-sm">
+                <img src="/images/before.png" alt="Before transformation" class="w-full h-40 object-cover" loading="lazy" />
+                <figcaption class="px-2 py-1 text-xs text-slate-600">Before</figcaption>
+              </figure>
+              <figure class="overflow-hidden rounded-lg border border-slate-200 shadow-sm">
+                <img src="/images/after.jpg" alt="After transformation" class="w-full h-40 object-cover" loading="lazy" />
+                <figcaption class="px-2 py-1 text-xs text-slate-600">After</figcaption>
+              </figure>
+            </div>
+
+            <form id="free-workout-form" class="space-y-4" action="/api/starter-kit" method="POST" novalidate>
+              <input type="hidden" name="subject" value="Free 6-Day Workout Program Request" />
+              <div>
+                <label for="first-name" class="label text-left">First name</label>
+                <input id="first-name" name="name" type="text" class="input" placeholder="Your first name" autocomplete="given-name" required />
+              </div>
+              <div>
+                <label for="email" class="label text-left">Email</label>
+                <input id="email" name="email" type="email" class="input" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+              <button type="submit" class="btn btn-primary w-full">Send Me the Free 6-Day Program</button>
+              <p class="text-sm text-slate-500" id="form-status" role="status" aria-live="polite"></p>
+              <div id="form-success" class="hidden rounded-md border border-emerald-200 bg-emerald-50 p-3 text-emerald-800 text-sm">
                 ✓ Check your inbox! The free workout program has been sent.
               </div>
             </form>
-            
-            <a href="#programs" class="mt-4 inline-block text-sm text-accent hover:underline">Scroll to see all programs →</a>
+            <p class="mt-4 text-xs text-slate-500">No spam. Just the exact program I use with busy clients.</p>
           </div>
+        </div>
+
+        <div class="mt-10 text-center">
+          <a href="#programs" class="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline">
+            See the bundle & downloads
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
     </section>
