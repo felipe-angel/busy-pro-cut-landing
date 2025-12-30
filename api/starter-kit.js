@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -13,71 +11,56 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ success: false, message: 'Invalid JSON body' });
   }
 
-  const { name, email, phone, consent, subject } = body || {};
-  if (!name || !email) {
-    return res.status(400).json({ success: false, message: 'Missing required fields' });
+  const { name, email, phone, product, page } = body || {};
+  const normalizedEmail = String(email || '').trim();
+  const normalizedPhone = String(phone || '').trim();
+  if (!normalizedEmail || !normalizedPhone) {
+    return res.status(400).json({ success: false, message: 'Email and phone are required' });
+  }
+  if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+    return res.status(400).json({ success: false, message: 'Please enter a valid email' });
+  }
+  if (normalizedPhone.replace(/\D/g, '').length < 7) {
+    return res.status(400).json({ success: false, message: 'Please enter a valid phone number' });
   }
 
   try {
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const notifyToEmail = process.env.NOTIFY_TO_EMAIL; // destination inbox
-    const fromEmail = process.env.FROM_EMAIL || 'Angel Coaching <onboarding@resend.dev>';
-
-    if (!resendApiKey || !notifyToEmail) {
+    const leadsWebhookUrl = process.env.LEADS_WEBHOOK_URL;
+    if (!leadsWebhookUrl) {
       return res.status(500).json({ success: false, message: 'Server not configured' });
     }
 
-    const html = `
-      <h2>New Workout Routine Signup</h2>
-      <ul>
-        <li><strong>Name:</strong> ${escapeHtml(name)}</li>
-        <li><strong>Email:</strong> ${escapeHtml(email)}</li>
-        ${phone ? `<li><strong>Phone:</strong> ${escapeHtml(phone)}</li>` : ''}
-        <li><strong>Consent:</strong> ${consent ? 'Yes' : 'No'}</li>
-      </ul>
-    `;
+    const normalizedProduct = product === 'bundle' ? 'bundle' : 'workout';
+    const redirect = normalizedProduct === 'bundle'
+      ? '/thank-you.html?product=bundle'
+      : '/thank-you.html?product=workout';
 
-    const notifyPayload = {
-      from: fromEmail,
-      to: [notifyToEmail],
-      subject: subject || 'New Workout Routine Signup',
-      html,
-      text: `New Workout Routine Signup\nName: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ''}\nConsent: ${consent ? 'Yes' : 'No'}`,
+    const payload = {
+      source: normalizedProduct,
+      name: (name || '').trim(),
+      email: normalizedEmail,
+      phone: normalizedPhone,
+      userAgent: req.headers['user-agent'] || '',
+      referrer: req.headers['referer'] || '',
+      page: String(page || req.headers['referer'] || '').trim(),
     };
 
-    // Build subscriber email with attachment
-    const pdfPath = path.join(process.cwd(), 'kit', 'workout-routine.pdf');
-    let attachment = null;
-    try {
-      const fileBuf = fs.readFileSync(pdfPath);
-      attachment = {
-        filename: 'My-Workout-Routine-6-Day-Split.pdf',
-        content: fileBuf.toString('base64'),
-      };
-    } catch (e) {
-      console.warn('Could not read PDF for attachment:', e?.message || e);
+    const response = await fetch(leadsWebhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const text = await response.text().catch(() => '');
+      console.error('Leads webhook error:', response.status, text);
+      return res.status(502).json({ success: false, message: 'Unable to save submission' });
     }
 
-    const publicUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/kit/workout-routine.pdf`;
-    const welcomeHtml = `
-      <p>Here is your free 6-day workout program. The PDF is attached.</p>
-      <p>If the attachment is missing, you can also download it here: <a href="${publicUrl}">${publicUrl}</a></p>
-      <p>This is my exact 6-day split designed to build strength and muscle with focused, low-volume, high-quality sets.</p>
-      <p>— Angel Coaching</p>
-    `;
-    const welcomePayload = {
-      from: fromEmail,
-      to: [email],
-      subject: 'Your Free 6-Day Workout Program',
-      html: welcomeHtml,
-      text: `Here is your free 6-day workout program. Download: ${publicUrl}`,
-      attachments: attachment ? [attachment] : undefined,
-    };
-
-    await sendResendEmail(resendApiKey, welcomePayload);
-    await sendResendEmail(resendApiKey, notifyPayload);
-
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, redirect });
   } catch (error) {
     console.error('Starter kit API error:', error);
     return res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -98,29 +81,3 @@ function readJson(req) {
     req.on('error', reject);
   });
 }
-
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-async function sendResendEmail(apiKey, payload) {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`Resend error: ${text}`);
-  }
-}
-
-

@@ -2,13 +2,7 @@
 const CALENDAR_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeJ5qWw4iaDnkkNeC3mc_7ENr1qFnpOBm2LWKzsc7LoPqdQsQ/viewform?usp=dialog';
 const EMAIL_ENDPOINT = '/api/starter-kit';
 
-// Stripe Payment Links
-const STRIPE_LINKS = {
-  bundle: 'https://buy.stripe.com/6oU9AU3Jk3gc4HY5Y0cfK0h'     // $25 - Update this with your new Stripe link
-};
-
-// Success URL base - customers will be redirected here after payment
-const SUCCESS_URL_BASE = 'https://angel-coaching.app/thank-you';
+// Note: Stripe is no longer used for downloads. All assets are free (soft-gated by the form).
 
 function openExternal(url) {
   window.open(url, '_blank', 'noopener');
@@ -80,62 +74,66 @@ function initAccordion() {
 }
 
 function initForm() {
-  const form = document.getElementById('free-workout-form') || document.getElementById('starter-kit-form');
-  if (!form) return;
-  const status = document.getElementById('form-status');
-  const success = document.getElementById('form-success');
+  const forms = [
+    document.getElementById('free-workout-form'),
+    document.getElementById('bundle-form'),
+    document.getElementById('starter-kit-form'),
+  ].filter(Boolean);
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (status) status.textContent = 'Sending…';
-    if (success) success.classList.add('hidden');
+  forms.forEach((form) => {
+    const status =
+      (form.id === 'bundle-form' && document.getElementById('bundle-form-status')) ||
+      document.getElementById('form-status');
+    const success = document.getElementById('form-success');
 
-    const payload = {
-      name: form.name?.value?.trim() || form.querySelector('#first-name')?.value?.trim() || '',
-      email: form.email?.value?.trim() || form.querySelector('#email')?.value?.trim() || '',
-      phone: form.phone?.value?.trim() || '',
-      consent: form.consent?.checked || true,
-      subject: form.querySelector('input[name="subject"]')?.value || 'Free 6-Day Workout Program Request',
-    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (status) status.textContent = 'Sending…';
+      if (success && form.id === 'free-workout-form') success.classList.add('hidden');
 
-    try {
-      const res = await fetch(form.action || EMAIL_ENDPOINT, {
-        method: form.method || 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error('Network error');
-      const data = await res.json().catch(() => ({}));
-      if (data && data.success === false) throw new Error('API error');
-      if (status) status.textContent = '';
-      if (success) {
-        success.classList.remove('hidden');
-        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const payload = {
+        name: form.name?.value?.trim() || form.querySelector('[name="name"]')?.value?.trim() || '',
+        email: form.email?.value?.trim() || form.querySelector('[name="email"]')?.value?.trim() || '',
+        phone: form.phone?.value?.trim() || form.querySelector('[name="phone"]')?.value?.trim() || '',
+        product: form.querySelector('input[name="product"]')?.value || '',
+        page: window.location.href,
+      };
+
+      try {
+        const res = await fetch(form.action || EMAIL_ENDPOINT, {
+          method: form.method || 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || (data && data.success === false)) {
+          throw new Error(data?.message || 'Network error');
+        }
+
+        if (data && data.redirect) {
+          window.location.href = data.redirect;
+          return;
+        }
+
+        if (status) status.textContent = '';
+        if (success && form.id === 'free-workout-form') {
+          success.classList.remove('hidden');
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        form.reset();
+      } catch (err) {
+        if (status) status.textContent = err?.message || 'Something went wrong. Please try again.';
       }
-      form.reset();
-    } catch (err) {
-      if (status) status.textContent = 'Something went wrong. Please try again.';
-    }
+    });
   });
 }
 
 function initStripeButtons() {
-  // Bundle button
-  const bundleBtn = document.querySelector('[data-product="bundle"]');
-  if (bundleBtn) {
-    if (STRIPE_LINKS.bundle && STRIPE_LINKS.bundle !== 'YOUR_BUNDLE_STRIPE_LINK_HERE') {
-      bundleBtn.href = STRIPE_LINKS.bundle;
-      bundleBtn.removeAttribute('onclick');
-    } else {
-      bundleBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Payment link not configured yet. Please contact support.');
-      });
-    }
-  }
+  // legacy no-op
 }
 
 function init() {
@@ -145,10 +143,10 @@ function init() {
   headerShadowOnScroll();
   initAccordion();
   initForm();
-  initStripeButtons();
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
 
 
 

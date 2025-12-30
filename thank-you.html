@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thank You for Your Purchase — Angel Coaching</title>
-  <meta name="description" content="Download your purchased blueprint and start your transformation journey." />
+  <title>Your Downloads — Angel Coaching</title>
+  <meta name="description" content="Get your free downloads instantly: workout routine and blueprints." />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Thank You for Your Purchase!</h1>
-            <p class="text-slate-600">Your order has been confirmed. Download your blueprint(s) below.</p>
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Your Downloads Are Ready</h1>
+            <p class="text-slate-600">Thanks — download your files below.</p>
           </div>
 
           <div id="download-section" class="card mb-6">
@@ -65,21 +65,8 @@
           </div>
 
           <div class="card bg-slate-50">
-            <h3 class="font-semibold text-slate-900 mb-2">What's Next?</h3>
-            <ul class="space-y-2 text-slate-700 text-sm">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>You'll also receive an email confirmation with download links</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Download links are valid indefinitely - save them for future reference</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>If you have any questions, reach out to us anytime</span>
-              </li>
-            </ul>
+            <h3 class="font-semibold text-slate-900 mb-2">Quick Note</h3>
+            <p class="text-slate-700 text-sm">If a download doesn’t start, try opening it in a new tab and saving it from there.</p>
           </div>
 
           <div class="mt-8 text-center">
@@ -104,6 +91,12 @@
     const product = urlParams.get('product');
 
     const products = {
+      'workout': {
+        name: 'Workout Routine',
+        files: [
+          { name: 'Workout Routine (6-Day Split)', url: '/kit/workout-routine.pdf' }
+        ]
+      },
       'training': {
         name: 'Training Blueprint',
         files: [
@@ -117,7 +110,7 @@
         ]
       },
       'bundle': {
-        name: 'Complete Bundle',
+        name: 'Training + Fat Loss Bundle',
         files: [
           { name: 'Training Blueprint', url: '/blueprints/Angel-Coaching-Training-Blueprint.pdf' },
           { name: 'Fat Loss Blueprint', url: '/blueprints/FAT-LOSS-BLUEPRINT.pdf' }
@@ -154,6 +147,7 @@
   </script>
 </body>
 </html>
+
 
 
 

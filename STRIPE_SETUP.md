@@ -1,7 +1,11 @@
-# Stripe Payment Integration Setup Guide
+# Stripe Payment Integration Setup Guide (Legacy)
+
+This project **no longer uses Stripe** for downloads. Downloads are free and are soft-gated by a form that logs submissions to Google Sheets.
+
+If you ever decide to re-enable paid access, this guide can be used as a starting point.
 
 ## Overview
-This site uses Stripe Payment Links for processing payments. After a successful payment, customers are redirected to a thank you page with download links for their purchased blueprints.
+This site previously used Stripe Payment Links for processing payments. It now uses free gated downloads instead.
 
 ## Setup Steps
 
@@ -84,6 +88,7 @@ Vercel will automatically deploy the changes.
 - **Buttons show alert**: Payment links not configured yet - update `STRIPE_LINKS` in `script.js`
 - **Webhook not working**: Check `STRIPE_WEBHOOK_SECRET` and `STRIPE_SECRET_KEY` in Vercel environment variables
 - **Wrong product on thank you page**: Verify success URLs in Stripe Payment Link settings match the pattern above
+
 
 
 
