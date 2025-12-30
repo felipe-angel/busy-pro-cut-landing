@@ -6,7 +6,7 @@ const EMAIL_ENDPOINT = '/api/starter-kit';
 
 // Temporary site-wide maintenance mode
 // Set to false to re-enable the site.
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 function openExternal(url) {
   window.open(url, '_blank', 'noopener');
