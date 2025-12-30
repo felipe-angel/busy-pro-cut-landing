@@ -4,8 +4,40 @@ const EMAIL_ENDPOINT = '/api/starter-kit';
 
 // Note: Stripe is no longer used for downloads. All assets are free (soft-gated by the form).
 
+// Temporary site-wide maintenance mode
+// Set to false to re-enable the site.
+const MAINTENANCE_MODE = true;
+
 function openExternal(url) {
   window.open(url, '_blank', 'noopener');
+}
+
+function showMaintenanceModal() {
+  if (!MAINTENANCE_MODE) return;
+  if (document.getElementById('maintenance-overlay')) return;
+
+  // Prevent background scroll
+  try { document.documentElement.style.overflow = 'hidden'; } catch (_) {}
+  try { document.body.style.overflow = 'hidden'; } catch (_) {}
+
+  const overlay = document.createElement('div');
+  overlay.id = 'maintenance-overlay';
+  overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/70 p-4';
+  overlay.innerHTML = `
+    <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-black/10">
+      <div class="flex items-center justify-between gap-4">
+        <div class="text-lg font-extrabold text-slate-900">Maintenance in progress</div>
+        <span class="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">Temporary</span>
+      </div>
+      <p class="mt-3 text-slate-700">
+        I’m doing some quick updates. Please come back tomorrow to get your <strong>free workout routine</strong>,
+        <strong>fat loss blueprint</strong>, and <strong>training blueprint</strong>.
+      </p>
+      <p class="mt-3 text-sm text-slate-500">Thanks for your patience.</p>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
 }
 
 function bindCTAButtons() {
@@ -137,6 +169,7 @@ function initStripeButtons() {
 }
 
 function init() {
+  showMaintenanceModal();
   bindCTAButtons();
   enableSmoothAnchors();
   initMobileMenu();
