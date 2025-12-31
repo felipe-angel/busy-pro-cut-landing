@@ -9,6 +9,12 @@
       "headers": [
         { "key": "Content-Disposition", "value": "attachment; filename=\"Pre-Workout-Carb-Timing.pdf\"" }
       ]
+    },
+    {
+      "source": "/blueprints/Lean-Drinking.pdf",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Lean-Drinking.pdf\"" }
+      ]
     }
   ],
   "rewrites": [
