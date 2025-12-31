@@ -5,9 +5,9 @@
   ],
   "headers": [
     {
-      "source": "/blueprints/Pre-Workout-Carb-Timing-Mini-Guide.pdf",
+      "source": "/blueprints/Pre-Workout-Carb-Timing.pdf",
       "headers": [
-        { "key": "Content-Disposition", "value": "attachment; filename=\"Pre-Workout-Carb-Timing-Mini-Guide.pdf\"" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Pre-Workout-Carb-Timing.pdf\"" }
       ]
     }
   ],
