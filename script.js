@@ -110,6 +110,7 @@ function initForm() {
     document.getElementById('free-workout-form'),
     document.getElementById('bundle-form'),
     document.getElementById('starter-kit-form'),
+    document.getElementById('coaching-application-form'),
   ].filter(Boolean);
 
   forms.forEach((form) => {
@@ -121,44 +122,98 @@ function initForm() {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (status) status.textContent = 'Sending…';
-      if (success && form.id === 'free-workout-form') success.classList.add('hidden');
+      if (success) success.classList.add('hidden');
 
-      const payload = {
-        name: form.name?.value?.trim() || form.querySelector('[name="name"]')?.value?.trim() || '',
-        email: form.email?.value?.trim() || form.querySelector('[name="email"]')?.value?.trim() || '',
-        phone: form.phone?.value?.trim() || form.querySelector('[name="phone"]')?.value?.trim() || '',
-        product: form.querySelector('input[name="product"]')?.value || '',
-        page: window.location.href,
-      };
+      // Handle coaching application form differently
+      if (form.id === 'coaching-application-form') {
+        const formData = new FormData(form);
+        const payload = {
+          name: formData.get('name') || '',
+          age: formData.get('age') || '',
+          height: formData.get('height') || '',
+          weight: formData.get('weight') || '',
+          gender: formData.get('gender') || '',
+          situation: formData.get('situation') || '',
+          primary_goal: formData.get('primary_goal') || '',
+          exercise_types: formData.getAll('exercise_types'),
+          exercise_other: formData.get('exercise_other') || '',
+          experience_level: formData.get('experience_level') || '',
+          specific_goal: formData.get('specific_goal') || '',
+          hardest_challenge: formData.get('hardest_challenge') || '',
+          muscle_groups: formData.get('muscle_groups') || '',
+          employed: formData.get('employed') || '',
+          phone: formData.get('phone') || '',
+          page: window.location.href,
+        };
 
-      try {
-        const res = await fetch(form.action || EMAIL_ENDPOINT, {
-          method: form.method || 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
+        try {
+          const res = await fetch(form.action || '/api/coaching-application', {
+            method: form.method || 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
 
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || (data && data.success === false)) {
-          throw new Error(data?.message || 'Network error');
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || (data && data.success === false)) {
+            throw new Error(data?.message || 'Network error');
+          }
+
+          if (data && data.redirect) {
+            window.location.href = data.redirect;
+            return;
+          }
+
+          if (status) status.textContent = '';
+          if (success) {
+            success.classList.remove('hidden');
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          form.reset();
+        } catch (err) {
+          if (status) status.textContent = err?.message || 'Something went wrong. Please try again.';
         }
+      } else {
+        // Handle other forms (workout, bundle, etc.)
+        const payload = {
+          name: form.name?.value?.trim() || form.querySelector('[name="name"]')?.value?.trim() || '',
+          email: form.email?.value?.trim() || form.querySelector('[name="email"]')?.value?.trim() || '',
+          phone: form.phone?.value?.trim() || form.querySelector('[name="phone"]')?.value?.trim() || '',
+          product: form.querySelector('input[name="product"]')?.value || '',
+          page: window.location.href,
+        };
 
-        if (data && data.redirect) {
-          window.location.href = data.redirect;
-          return;
-        }
+        try {
+          const res = await fetch(form.action || EMAIL_ENDPOINT, {
+            method: form.method || 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
 
-        if (status) status.textContent = '';
-        if (success && form.id === 'free-workout-form') {
-          success.classList.remove('hidden');
-          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || (data && data.success === false)) {
+            throw new Error(data?.message || 'Network error');
+          }
+
+          if (data && data.redirect) {
+            window.location.href = data.redirect;
+            return;
+          }
+
+          if (status) status.textContent = '';
+          if (success && form.id === 'free-workout-form') {
+            success.classList.remove('hidden');
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          form.reset();
+        } catch (err) {
+          if (status) status.textContent = err?.message || 'Something went wrong. Please try again.';
         }
-        form.reset();
-      } catch (err) {
-        if (status) status.textContent = err?.message || 'Something went wrong. Please try again.';
       }
     });
   });

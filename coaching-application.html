@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coaching Application — Angel Coaching</title>
+  <meta name="description" content="Apply for personalized coaching with Angel Coaching. Fill out our comprehensive fitness questionnaire to get started." />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/brand.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { screens: { 'xs': '420px' } } } }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9BEFXBGF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9BEFXBGF1', { debug_mode: true });
+  </script>
+
+  <style>
+    html:focus-within { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html:focus-within { scroll-behavior: auto; } }
+  </style>
+</head>
+<body id="top" class="min-h-screen bg-white text-slate-800 antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header id="site-header" class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="font-semibold tracking-tight text-slate-900 text-base sm:text-lg" aria-label="Angel Coaching home">
+          Angel Coaching
+        </a>
+        <nav class="hidden md:flex items-center gap-3 text-sm font-medium" aria-label="Primary">
+          <a class="btn btn-ghost px-3 py-2 text-sm font-semibold" href="/fat-loss.html">Fat Loss &amp; Training Blueprint</a>
+          <a class="btn btn-primary px-3 py-2 text-sm font-semibold" href="/coaching-application.html">Coaching Application</a>
+        </nav>
+        <button id="mobile-menu-button" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white" role="dialog" aria-label="Mobile menu">
+      <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6">
+        <div class="flex flex-col gap-2">
+          <a class="btn btn-ghost px-3 py-2 text-sm font-semibold justify-center text-center" href="/fat-loss.html">Fat Loss &amp; Training Blueprint</a>
+          <a class="btn btn-primary px-3 py-2 text-sm font-semibold justify-center text-center" href="/coaching-application.html">Coaching Application</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="outline-none">
+    <section class="section">
+      <div class="section-inner">
+        <div class="max-w-3xl mx-auto">
+          <h1 class="section-title mb-4">Fitness Plan Questionnaire</h1>
+          <p class="text-slate-600 mb-8 text-base">
+            This form is for the people who are seriously interested in making changes within themselves and their habits. All information filled out on this form will be kept confidential.
+          </p>
+
+          <form id="coaching-application-form" class="card space-y-6" action="/api/coaching-application" method="POST" novalidate>
+            <!-- Name -->
+            <div>
+              <label for="name" class="label">
+                Name? <span class="text-red-500">*</span>
+              </label>
+              <input id="name" name="name" type="text" class="input" placeholder="Your name" autocomplete="name" required />
+            </div>
+
+            <!-- Age -->
+            <div>
+              <label for="age" class="label">Age?</label>
+              <input id="age" name="age" type="number" class="input" placeholder="Your age" min="1" max="120" />
+            </div>
+
+            <!-- Height -->
+            <div>
+              <label for="height" class="label">Height?</label>
+              <input id="height" name="height" type="text" class="input" placeholder="e.g., 5'10&quot; or 178 cm" />
+            </div>
+
+            <!-- Weight -->
+            <div>
+              <label for="weight" class="label">Weight?</label>
+              <input id="weight" name="weight" type="number" class="input" placeholder="Your weight" min="1" step="0.1" />
+            </div>
+
+            <!-- Gender -->
+            <div>
+              <label class="label">
+                Gender? <span class="text-red-500">*</span>
+              </label>
+              <div class="flex gap-6 mt-2">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="gender" value="Male" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Male</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="gender" value="Female" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Female</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Situation -->
+            <div>
+              <label class="label">
+                What describes your situation best? <span class="text-red-500">*</span>
+              </label>
+              <div class="space-y-3 mt-2">
+                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="situation" value="I want to reach my fitness goals as soon as possible" class="mt-1 w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>I want to reach my fitness goals as soon as possible</span>
+                </label>
+                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="situation" value="I'm ok with a slightly slower approach that might be easier to follow yet is still challenging" class="mt-1 w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>I'm ok with a slightly slower approach that might be easier to follow yet is still challenging</span>
+                </label>
+                <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="situation" value="I'm not in a rush and just want to start making small steps forward" class="mt-1 w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>I'm not in a rush and just want to start making small steps forward</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Primary Goal -->
+            <div>
+              <label class="label">
+                What is your primary goal? <span class="text-red-500">*</span>
+              </label>
+              <div class="space-y-3 mt-2">
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="primary_goal" value="Health" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Health</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="primary_goal" value="Muscle Gain" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Muscle Gain</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="primary_goal" value="Fat loss" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Fat loss</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="primary_goal" value="Strength Training" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Strength Training</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="primary_goal" value="Endurance Training" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Endurance Training</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Exercise Types -->
+            <div>
+              <label class="label">
+                What types of exercise do you currently do? (Select all that apply) <span class="text-red-500">*</span>
+              </label>
+              <div class="space-y-3 mt-2">
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="Weight Training" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Weight Training</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="Cardio" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Cardio</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="Yoga/Pilates" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Yoga/Pilates</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="Sports" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Sports</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="None" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>None</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="checkbox" name="exercise_types" value="Other" id="exercise-other-checkbox" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Other:</span>
+                </label>
+                <div id="exercise-other-input" class="hidden ml-7">
+                  <input type="text" name="exercise_other" class="input" placeholder="Please specify" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Experience Level -->
+            <div>
+              <label class="label">
+                What is your experience level with weight training? <span class="text-red-500">*</span>
+              </label>
+              <div class="space-y-3 mt-2">
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="experience_level" value="Completely new" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Completely new</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="experience_level" value="Some experience" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Some experience</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="experience_level" value="Experienced" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Experienced</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                  <input type="radio" name="experience_level" value="Expert" class="w-4 h-4 text-accent focus:ring-accent" required />
+                  <span>Expert</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Specific Goal -->
+            <div>
+              <label for="specific_goal" class="label">
+                Do you have a specific goal you want to meet (goal weight or strength) and if so do you have a timeline in mind? <span class="text-red-500">*</span>
+              </label>
+              <textarea id="specific_goal" name="specific_goal" rows="4" class="input" placeholder="Please describe your specific goals and timeline..." required></textarea>
+            </div>
+
+            <!-- Hardest Challenge -->
+            <div>
+              <label for="hardest_challenge" class="label">
+                What has been the hardest/most challenging thing in the past when it comes to meeting your fitness/health goal? <span class="text-red-500">*</span>
+              </label>
+              <textarea id="hardest_challenge" name="hardest_challenge" rows="4" class="input" placeholder="Please describe your challenges..." required></textarea>
+            </div>
+
+            <!-- Muscle Groups -->
+            <div>
+              <label for="muscle_groups" class="label">
+                Are there any muscle groups your lacking in or want to prioritize growth in? <span class="text-red-500">*</span>
+              </label>
+              <textarea id="muscle_groups" name="muscle_groups" rows="4" class="input" placeholder="Please list muscle groups you want to prioritize..." required></textarea>
+            </div>
+
+            <!-- Employment Status -->
+            <div>
+              <label class="label">Are you employed?</label>
+              <div class="flex gap-6 mt-2">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="employed" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>Yes</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="employed" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label for="phone" class="label">
+                Enter the best number to reach you: <span class="text-red-500">*</span>
+              </label>
+              <input id="phone" name="phone" type="tel" class="input" placeholder="(555) 555-5555" autocomplete="tel" required />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto">Submit</button>
+              <p class="mt-4 text-sm text-slate-500" id="form-status" role="status" aria-live="polite"></p>
+              <div id="form-success" class="mt-4 hidden rounded-md border border-emerald-200 bg-emerald-50 p-3 text-emerald-800 text-sm">
+                ✓ Application submitted successfully!
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <div class="font-semibold text-slate-900">Angel Coaching</div>
+          <div class="text-xs text-slate-500">Science-led • Results-driven</div>
+        </div>
+        <nav class="flex items-center gap-5 text-sm text-slate-600" aria-label="Footer">
+          <a href="/" class="hover:text-slate-900">Home</a>
+          <a href="/fat-loss.html" class="hover:text-slate-900">Fat Loss &amp; Training Blueprint</a>
+          <a href="/coaching-application.html" class="hover:text-slate-900">Coaching Application</a>
+          <a href="https://www.instagram.com/angel_coaching1/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900" aria-label="Follow us on Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </nav>
+      </div>
+      <div class="mt-8 text-xs text-slate-500">© 2025 Angel Coaching. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="/script.js" defer></script>
+  <script>
+    // Show/hide "Other" exercise type input
+    document.addEventListener('DOMContentLoaded', function() {
+      const otherCheckbox = document.getElementById('exercise-other-checkbox');
+      const otherInput = document.getElementById('exercise-other-input');
+      if (otherCheckbox && otherInput) {
+        otherCheckbox.addEventListener('change', function() {
+          if (this.checked) {
+            otherInput.classList.remove('hidden');
+            otherInput.querySelector('input').focus();
+          } else {
+            otherInput.classList.add('hidden');
+            otherInput.querySelector('input').value = '';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+
