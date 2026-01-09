@@ -18,7 +18,8 @@
     }
   ],
   "rewrites": [
-    { "source": "/thank-you", "destination": "/thank-you.html" }
+    { "source": "/thank-you", "destination": "/thank-you.html" },
+    { "source": "/1-on-1-coaching", "destination": "/1-on-1-coaching.html" }
   ]
 }
 
