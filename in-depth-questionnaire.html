@@ -1,0 +1,1479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>In-Depth Questionnaire — Angel Coaching</title>
+  <meta name="description" content="Comprehensive in-depth questionnaire for Angel Coaching clients." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/brand.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { screens: { 'xs': '420px' } } } }
+  </script>
+
+  <style>
+    html:focus-within { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html:focus-within { scroll-behavior: auto; } }
+    .section-header { 
+      background: linear-gradient(135deg, var(--accent), var(--accent-600));
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body id="top" class="min-h-screen bg-white text-slate-800 antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header id="site-header" class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="font-semibold tracking-tight text-slate-900 text-base sm:text-lg" aria-label="Angel Coaching home">
+          Angel Coaching
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="outline-none">
+    <section class="section">
+      <div class="section-inner">
+        <div class="max-w-3xl mx-auto">
+          <h1 class="section-title mb-4">In-Depth Questionnaire</h1>
+          <p class="text-slate-600 mb-8 text-base">
+            Please fill out as much as you can. All fields are optional, but the more information you provide, the better I can tailor your program. All information is kept confidential.
+          </p>
+
+          <form id="in-depth-questionnaire-form" class="space-y-8" action="/api/in-depth-questionnaire" method="POST" novalidate>
+            
+            <!-- Section 1: Basics & Logistics -->
+            <div class="card">
+              <div class="section-header">1) Basics & Logistics</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="full_name" class="label">Full name</label>
+                  <input id="full_name" name="full_name" type="text" class="input" placeholder="Your full name" autocomplete="name" />
+                </div>
+
+                <div>
+                  <label for="email" class="label">Email</label>
+                  <input id="email" name="email" type="email" class="input" placeholder="you@example.com" autocomplete="email" />
+                </div>
+
+                <div>
+                  <label for="phone" class="label">Phone number</label>
+                  <input id="phone" name="phone" type="tel" class="input" placeholder="(555) 555-5555" autocomplete="tel" />
+                </div>
+
+                <div>
+                  <label for="timezone" class="label">Time zone</label>
+                  <input id="timezone" name="timezone" type="text" class="input" placeholder="e.g., EST, PST, CST" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="age" class="label">Age</label>
+                    <input id="age" name="age" type="number" class="input" placeholder="25" min="1" max="120" />
+                  </div>
+                  <div>
+                    <label for="sex" class="label">Sex</label>
+                    <select id="sex" name="sex" class="input">
+                      <option value="">Select...</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="height" class="label">Height</label>
+                    <input id="height" name="height" type="text" class="input" placeholder="5'10&quot; or 178cm" />
+                  </div>
+                  <div>
+                    <label for="current_weight" class="label">Current weight</label>
+                    <input id="current_weight" name="current_weight" type="text" class="input" placeholder="175 lbs" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="body_fat" class="label">Estimated body fat % (if known)</label>
+                    <input id="body_fat" name="body_fat" type="text" class="input" placeholder="e.g., 15%" />
+                  </div>
+                  <div>
+                    <label for="daily_steps" class="label">Average daily step count (if known)</label>
+                    <input id="daily_steps" name="daily_steps" type="text" class="input" placeholder="e.g., 8000" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="upcoming_events" class="label">Do you have any upcoming travel, schedule changes, or major events in the next 4–8 weeks? If yes, list dates/details.</label>
+                  <textarea id="upcoming_events" name="upcoming_events" rows="3" class="input" placeholder="List any upcoming events, travel, or schedule changes..."></textarea>
+                </div>
+
+                <div>
+                  <label class="label">Preferred method of communication for questions</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="communication_method" value="Trainerize" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Trainerize</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="communication_method" value="Text" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Text</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="communication_method" value="Email" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Email</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Main Goal & Outcome -->
+            <div class="card">
+              <div class="section-header">2) Main Goal & Outcome</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">What is your primary goal right now? (Choose one)</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Fat loss (cut)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Fat loss (cut)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Lean bulk (muscle gain with minimal fat)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Lean bulk (muscle gain with minimal fat)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Build muscle (ok with some fat gain)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Build muscle (ok with some fat gain)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Maintain" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Maintain</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Recomposition (lose fat + build muscle slowly)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Recomposition (lose fat + build muscle slowly)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
+                      <input type="radio" name="primary_goal" value="Performance (strength/cardio)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Performance (strength/cardio)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="top_outcomes" class="label">What are your top 1–3 outcomes you want most?</label>
+                  <textarea id="top_outcomes" name="top_outcomes" rows="3" class="input" placeholder="Examples: 'lose 15 lb,' 'visible abs,' 'bigger shoulders,' 'stronger bench,' 'feel better/energy,' etc."></textarea>
+                </div>
+
+                <div>
+                  <label class="label">What's your target timeline?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="timeline" value="4 weeks" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>4 weeks</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="timeline" value="8 weeks" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>8 weeks</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="timeline" value="12+ weeks" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>12+ weeks</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="timeline" value="No specific timeline" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No specific timeline</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="measure_success" class="label">How will you measure success?</label>
+                  <input id="measure_success" name="measure_success" type="text" class="input" placeholder="Scale weight / photos / waist measurement / strength PRs / how clothes fit / energy" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="goal_importance" class="label">On a scale of 1–10, how important is this goal to you right now?</label>
+                    <input id="goal_importance" name="goal_importance" type="number" class="input" placeholder="1-10" min="1" max="10" />
+                  </div>
+                  <div>
+                    <label for="confidence_level" class="label">On a scale of 1–10, how confident are you you can be consistent for the next month?</label>
+                    <input id="confidence_level" name="confidence_level" type="number" class="input" placeholder="1-10" min="1" max="10" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">If you're unsure what phase you should do (cut/maintain/lean bulk), would you like me to decide based on photos + your goals?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="decide_phase" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="decide_phase" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="progress_photos" class="label">Progress Photos (optional but recommended)</label>
+                  <p class="text-xs text-slate-500 mb-2">Upload front/side/back photos in consistent lighting (and/or your most recent physique pictures). You can email these separately if preferred.</p>
+                  <textarea id="progress_photos" name="progress_photos" rows="2" class="input" placeholder="Describe photos you'll send or note 'will email separately'"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Training Experience & Current Routine -->
+            <div class="card">
+              <div class="section-header">3) Training Experience & Current Routine</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">How long have you been lifting consistently?</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="lifting_experience" value="0–3 months" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>0–3 months</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="lifting_experience" value="3–12 months" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3–12 months</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="lifting_experience" value="1–3 years" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>1–3 years</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="lifting_experience" value="3–5 years" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3–5 years</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="lifting_experience" value="5+ years" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>5+ years</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="current_training" class="label">What does your current weekly training look like? (days/week + what you do each day)</label>
+                  <textarea id="current_training" name="current_training" rows="3" class="input" placeholder="Describe your current training schedule..."></textarea>
+                </div>
+
+                <div>
+                  <label for="what_worked" class="label">What's worked best for you in the past? (training style, split, exercises, schedule)</label>
+                  <textarea id="what_worked" name="what_worked" rows="3" class="input" placeholder="What has worked well for you before..."></textarea>
+                </div>
+
+                <div>
+                  <label for="what_not_worked" class="label">What has NOT worked for you in the past? (and why)</label>
+                  <textarea id="what_not_worked" name="what_not_worked" rows="3" class="input" placeholder="What hasn't worked and why..."></textarea>
+                </div>
+
+                <div>
+                  <label class="label">Do you consider yourself:</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="experience_level" value="Beginner" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Beginner</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="experience_level" value="Intermediate" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Intermediate</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="experience_level" value="Advanced" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Advanced</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">What are your current estimated strength numbers? (if known)</label>
+                  <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                      <label for="bench" class="text-xs text-slate-500">Bench</label>
+                      <input id="bench" name="bench" type="text" class="input" placeholder="e.g., 185 lbs" />
+                    </div>
+                    <div>
+                      <label for="squat" class="text-xs text-slate-500">Squat</label>
+                      <input id="squat" name="squat" type="text" class="input" placeholder="e.g., 225 lbs" />
+                    </div>
+                    <div>
+                      <label for="deadlift" class="text-xs text-slate-500">Deadlift or RDL</label>
+                      <input id="deadlift" name="deadlift" type="text" class="input" placeholder="e.g., 275 lbs" />
+                    </div>
+                    <div>
+                      <label for="pullups" class="text-xs text-slate-500">Pull-ups (max reps)</label>
+                      <input id="pullups" name="pullups" type="text" class="input" placeholder="e.g., 10 reps" />
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <label for="other_lifts" class="text-xs text-slate-500">Other lifts you care about</label>
+                    <input id="other_lifts" name="other_lifts" type="text" class="input" placeholder="e.g., OHP, rows, etc." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Schedule, Availability, and Preferences (Training) -->
+            <div class="card">
+              <div class="section-header">4) Schedule, Availability, and Preferences (Training)</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">How many days per week can you realistically train most weeks?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_days" value="3" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_days" value="4" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>4</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_days" value="5" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>5</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_days" value="6" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>6</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">How many minutes can you realistically train per session?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="session_length" value="30" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>30</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="session_length" value="45" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>45</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="session_length" value="60" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>60</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="session_length" value="75+" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>75+</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Preferred training days (check all that apply)</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Mon" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Mon</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Tue" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Tue</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Wed" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Wed</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Thu" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Thu</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Fri" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Fri</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Sat" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Sat</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="preferred_days" value="Sun" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Sun</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Preferred training time</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_time" value="Morning" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Morning</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_time" value="Lunch" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Lunch</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_time" value="Afternoon" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Afternoon</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_time" value="Evening" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Evening</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_time" value="Varies" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Varies</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Do you prefer:</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="schedule_preference" value="A set schedule (exact days)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>A set schedule (exact days)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="schedule_preference" value="Flexible schedule (I'll move days around week-to-week)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Flexible schedule (I'll move days around week-to-week)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Do you train at:</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="gym_type" value="Commercial gym" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Commercial gym</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="gym_type" value="Apartment gym" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Apartment gym</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="gym_type" value="Home gym" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Home gym</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="gym_type" value="Mix" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Mix (explain below)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="schedule_constraints" class="label">Any upcoming schedule constraints? (work hours, kids, commuting, travel, busy seasons)</label>
+                  <textarea id="schedule_constraints" name="schedule_constraints" rows="2" class="input" placeholder="List any constraints..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Equipment & Gym Access -->
+            <div class="card">
+              <div class="section-header">5) Equipment & Gym Access (Very Important)</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">What equipment do you have access to? (check all that apply)</label>
+                  <div class="grid grid-cols-2 gap-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Barbells + plates" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Barbells + plates</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Dumbbells" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Dumbbells</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Cable stations" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Cable stations</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Machines" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Machines (chest press, leg press, hack squat, etc.)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Smith machine" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Smith machine</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Pull-up bar" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Pull-up bar</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Adjustable bench" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Adjustable bench</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Leg extension / leg curl" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Leg extension / leg curl</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Trap bar" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Trap bar</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Bands" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Bands</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="equipment" value="Cardio machines" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Cardio machines (treadmill/bike/rower/stairmaster)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="dumbbell_weight" class="label">Dumbbells up to what weight?</label>
+                  <input id="dumbbell_weight" name="dumbbell_weight" type="text" class="input" placeholder="e.g., up to 100 lbs" />
+                </div>
+
+                <div>
+                  <label for="equipment_missing" class="label">Anything your gym does NOT have that might limit exercises?</label>
+                  <textarea id="equipment_missing" name="equipment_missing" rows="2" class="input" placeholder="List any missing equipment..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 6: Injuries, Pain, Limitations -->
+            <div class="card">
+              <div class="section-header">6) Injuries, Pain, Limitations (Non-Negotiable)</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">Do you have any current injuries, chronic pain, or movement limitations?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="current_injuries" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="current_injuries" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="injury_details" class="label">If yes: where, what movements aggravate it, and what has been diagnosed (if anything)?</label>
+                  <textarea id="injury_details" name="injury_details" rows="3" class="input" placeholder="Describe any injuries or pain..."></textarea>
+                </div>
+
+                <div>
+                  <label for="past_injuries" class="label">Any past injuries or surgeries that matter for training?</label>
+                  <textarea id="past_injuries" name="past_injuries" rows="2" class="input" placeholder="List past injuries or surgeries..."></textarea>
+                </div>
+
+                <div>
+                  <label for="exercises_avoid" class="label">Any exercises that cause pain and must be avoided?</label>
+                  <textarea id="exercises_avoid" name="exercises_avoid" rows="2" class="input" placeholder="List exercises to avoid..."></textarea>
+                </div>
+
+                <div>
+                  <label for="exercises_dislike" class="label">Any exercises you strongly dislike or refuse to do? (and why)</label>
+                  <textarea id="exercises_dislike" name="exercises_dislike" rows="2" class="input" placeholder="List exercises you dislike..."></textarea>
+                </div>
+
+                <div>
+                  <label for="exercises_love" class="label">Any exercises you LOVE and want included?</label>
+                  <textarea id="exercises_love" name="exercises_love" rows="2" class="input" placeholder="List exercises you love..."></textarea>
+                </div>
+
+                <div>
+                  <label for="medical_conditions" class="label">Any medical conditions or medications that could affect training (blood pressure, heart issues, asthma, etc.)?</label>
+                  <textarea id="medical_conditions" name="medical_conditions" rows="2" class="input" placeholder="List any medical conditions or medications..."></textarea>
+                </div>
+
+                <div>
+                  <label class="label">Are you currently cleared by a medical professional to exercise?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="medical_clearance" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="medical_clearance" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="medical_clearance" value="Not sure" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Not sure</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Muscle Priorities & Physique Focus -->
+            <div class="card">
+              <div class="section-header">7) Muscle Priorities & Physique Focus</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">Which areas do you most want to improve? (pick up to 3)</label>
+                  <div class="grid grid-cols-2 gap-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Chest" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Chest</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Back (width)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Back (width)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Back (thickness)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Back (thickness)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Shoulders (side delts)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Shoulders (side delts)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Arms (biceps)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Arms (biceps)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Arms (triceps)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Arms (triceps)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Legs (quads)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Legs (quads)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Legs (hamstrings/glutes)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Legs (hamstrings/glutes)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Calves" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Calves</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="muscle_priorities" value="Abs/core" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Abs/core</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="overdeveloped_areas" class="label">Which areas feel overdeveloped or you want to maintain only?</label>
+                  <input id="overdeveloped_areas" name="overdeveloped_areas" type="text" class="input" placeholder="List areas to maintain..." />
+                </div>
+
+                <div>
+                  <label for="posture_goals" class="label">Any posture goals? (broader shoulders, better posture, less rounded shoulders, etc.)</label>
+                  <input id="posture_goals" name="posture_goals" type="text" class="input" placeholder="Describe posture goals..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 8: Split Preference & Training Style -->
+            <div class="card">
+              <div class="section-header">8) Split Preference & Training Style</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">Do you have a preferred split? (choose one or "leave it to you")</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preferred_split" value="Full-body" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Full-body</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preferred_split" value="Upper/Lower" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Upper/Lower</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preferred_split" value="Push/Pull/Legs" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Push/Pull/Legs</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preferred_split" value="Arnold split (Chest/Back, Legs, Shoulders/Arms)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Arnold split (Chest/Back, Legs, Shoulders/Arms)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preferred_split" value="Leave it to you" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Leave it to you</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Do you prefer:</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="weight_preference" value="More machines" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>More machines</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="weight_preference" value="More free weights" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>More free weights</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="weight_preference" value="Balanced mix" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Balanced mix</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">What's your main priority in training right now?</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_priority" value="Strength focus" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Strength focus</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_priority" value="Hypertrophy/physique focus" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Hypertrophy/physique focus</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_priority" value="Hybrid (strength + conditioning)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Hybrid (strength + conditioning)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_priority" value="General health/consistency" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>General health/consistency</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">How hard do you like to train most sets?</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_intensity" value="Close to failure often" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Close to failure often</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_intensity" value="Moderate effort (a couple reps left)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Moderate effort (a couple reps left)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="training_intensity" value="Not sure" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Not sure</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 9: Cardio, Steps, and Activity -->
+            <div class="card">
+              <div class="section-header">9) Cardio, Steps, and Activity</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">Are you currently doing cardio?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="doing_cardio" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="doing_cardio" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="cardio_details" class="label">If yes: type, days/week, and minutes/session</label>
+                  <input id="cardio_details" name="cardio_details" type="text" class="input" placeholder="e.g., Walking 30 min, 4x/week" />
+                </div>
+
+                <div>
+                  <label class="label">Do you enjoy cardio or hate it?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="cardio_enjoyment" value="Enjoy" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Enjoy</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="cardio_enjoyment" value="Hate" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Hate</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="cardio_enjoyment" value="Neutral" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Neutral</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Preferred cardio options (pick what you'll actually do)</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Walking" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Walking</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Incline treadmill" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Incline treadmill</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Bike" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Bike</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Stairmaster" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Stairmaster</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Rowing" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Rowing</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="cardio_options" value="Sports/classes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Sports/classes</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Average daily activity outside the gym</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="daily_activity" value="Mostly sitting" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Mostly sitting</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="daily_activity" value="Mixed" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Mixed</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="daily_activity" value="Very active job (10k+ steps/day)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Very active job (10k+ steps/day)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="step_target" class="label">Any step target you're currently hitting (or want to hit)?</label>
+                  <input id="step_target" name="step_target" type="text" class="input" placeholder="e.g., 10,000 steps/day" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 10: Recovery, Stress, and Lifestyle -->
+            <div class="card">
+              <div class="section-header">10) Recovery, Stress, and Lifestyle</div>
+              
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="avg_sleep" class="label">Average sleep per night</label>
+                    <input id="avg_sleep" name="avg_sleep" type="text" class="input" placeholder="e.g., 7 hours" />
+                  </div>
+                  <div>
+                    <label for="sleep_quality" class="label">Sleep quality (1–10)</label>
+                    <input id="sleep_quality" name="sleep_quality" type="number" class="input" placeholder="1-10" min="1" max="10" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="stress_level" class="label">Current stress level (1–10)</label>
+                    <input id="stress_level" name="stress_level" type="number" class="input" placeholder="1-10" min="1" max="10" />
+                  </div>
+                  <div>
+                    <label for="run_down_days" class="label">How many days/week do you feel "run down" or low energy?</label>
+                    <input id="run_down_days" name="run_down_days" type="text" class="input" placeholder="e.g., 2-3 days" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="stress_causes" class="label">What causes most of your stress? (work/school/kids/relationships/etc.)</label>
+                  <input id="stress_causes" name="stress_causes" type="text" class="input" placeholder="Main stress sources..." />
+                </div>
+
+                <div>
+                  <label for="recovery_tools" class="label">Any recovery tools you use? (stretching, sauna, massage gun, etc.)</label>
+                  <input id="recovery_tools" name="recovery_tools" type="text" class="input" placeholder="List recovery tools..." />
+                </div>
+
+                <div>
+                  <label for="recovery_limitations" class="label">Any limitations that affect recovery? (shift work, newborn, long commute)</label>
+                  <input id="recovery_limitations" name="recovery_limitations" type="text" class="input" placeholder="List any limitations..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 11: Nutrition Goal & Strategy Preference -->
+            <div class="card">
+              <div class="section-header">11) Nutrition Goal & Strategy Preference</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">Nutrition goal for the next month</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_goal" value="Cut (fat loss)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Cut (fat loss)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_goal" value="Maintain" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Maintain</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_goal" value="Lean bulk" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Lean bulk</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_goal" value="Not sure (decide for me)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Not sure (decide for me)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">What do you want from nutrition support? (pick one)</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_support" value="Very structured meal plan (exact meals)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Very structured meal plan (exact meals)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_support" value="Flexible meal plan (options to mix & match)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Flexible meal plan (options to mix & match)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_support" value="Macros-based plan (hit targets with flexible food choices)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Macros-based plan (hit targets with flexible food choices)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="nutrition_support" value="I want the simplest plan that works" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>"I want the simplest plan that works"</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Are you willing to track food?</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="willing_to_track" value="Yes, weigh/measure" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes, weigh/measure</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="willing_to_track" value="Yes, but loosely" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes, but loosely</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="willing_to_track" value="No tracking (need structure without tracking)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No tracking (need structure without tracking)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="current_tracking" class="label">Are you currently tracking? If yes, what app and what are your current calories/macros?</label>
+                  <input id="current_tracking" name="current_tracking" type="text" class="input" placeholder="e.g., MyFitnessPal, 2000 cal, 150P/200C/80F" />
+                </div>
+
+                <div>
+                  <label class="label">Biggest nutrition challenge right now (pick top 1–2)</label>
+                  <div class="grid grid-cols-2 gap-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Late-night snacking" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Late-night snacking</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Eating out often" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Eating out often</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Weekends" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Weekends</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Alcohol" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Alcohol</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Travel" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Travel</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Binge/trigger foods" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Binge/trigger foods</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Low protein" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Low protein</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Busy schedule/no time to cook" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Busy schedule/no time to cook</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Cravings/sweets" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Cravings/sweets</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Portion control" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Portion control</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" name="nutrition_challenges" value="Inconsistent meal timing" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span class="text-sm">Inconsistent meal timing</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 12: Current Eating Pattern & Schedule Constraints -->
+            <div class="card">
+              <div class="section-header">12) Current Eating Pattern & Schedule Constraints</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="label">How many times per day do you usually eat?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="meals_per_day" value="1" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>1</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="meals_per_day" value="2" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>2</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="meals_per_day" value="3" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="meals_per_day" value="4+" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>4+</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Typical eating schedule (rough times)</label>
+                  <div class="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                      <label class="text-xs text-slate-500">Meal 1</label>
+                      <input name="meal1_time" type="text" class="input" placeholder="e.g., 8am" />
+                    </div>
+                    <div>
+                      <label class="text-xs text-slate-500">Meal 2</label>
+                      <input name="meal2_time" type="text" class="input" placeholder="e.g., 12pm" />
+                    </div>
+                    <div>
+                      <label class="text-xs text-slate-500">Meal 3</label>
+                      <input name="meal3_time" type="text" class="input" placeholder="e.g., 6pm" />
+                    </div>
+                    <div>
+                      <label class="text-xs text-slate-500">Snacks</label>
+                      <input name="snacks_time" type="text" class="input" placeholder="e.g., 3pm, 9pm" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Do you do intermittent fasting?</label>
+                  <div class="flex gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="intermittent_fasting" value="Yes" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="intermittent_fasting" value="No" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="eating_window" class="label">If yes, what eating window?</label>
+                  <input id="eating_window" name="eating_window" type="text" class="input" placeholder="e.g., 12pm - 8pm" />
+                </div>
+
+                <div>
+                  <label for="training_time_meal" class="label">What time do you usually train?</label>
+                  <input id="training_time_meal" name="training_time_meal" type="text" class="input" placeholder="e.g., 6am or 5pm" />
+                </div>
+
+                <div>
+                  <label class="label">Do you prefer a pre-workout snack/meal, or do you train fasted?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preworkout_preference" value="Pre-workout meal" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Pre-workout meal</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preworkout_preference" value="Train fasted" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Train fasted</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="preworkout_preference" value="Either is fine" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Either is fine</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="typical_weekday" class="label">What does a "typical weekday" of eating look like for you? (quick description)</label>
+                  <textarea id="typical_weekday" name="typical_weekday" rows="3" class="input" placeholder="Describe a typical weekday of eating..."></textarea>
+                </div>
+
+                <div>
+                  <label for="typical_weekend" class="label">What does a "typical weekend" of eating look like for you?</label>
+                  <textarea id="typical_weekend" name="typical_weekend" rows="3" class="input" placeholder="Describe a typical weekend of eating..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 13: Food Preferences, Restrictions, and Non-Negotiables -->
+            <div class="card">
+              <div class="section-header">13) Food Preferences, Restrictions, and Non-Negotiables</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="allergies" class="label">Any allergies or intolerances? (dairy, gluten, nuts, etc.)</label>
+                  <input id="allergies" name="allergies" type="text" class="input" placeholder="List any allergies..." />
+                </div>
+
+                <div>
+                  <label for="foods_refuse" class="label">Any foods you refuse to eat (taste/ethical reasons)?</label>
+                  <input id="foods_refuse" name="foods_refuse" type="text" class="input" placeholder="List foods you won't eat..." />
+                </div>
+
+                <div>
+                  <label for="foods_prefer" class="label">Any foods you strongly prefer included?</label>
+                  <input id="foods_prefer" name="foods_prefer" type="text" class="input" placeholder="List foods you love..." />
+                </div>
+
+                <div>
+                  <label class="label">Do you have any dietary style preference?</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="No preference" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No preference</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="High-protein" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>High-protein</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="Lower-carb" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Lower-carb</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="Higher-carb" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Higher-carb</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="Mediterranean-ish" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Mediterranean-ish</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dietary_style" value="Other" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Other (explain below)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="religious_restrictions" class="label">Any religious/cultural food restrictions?</label>
+                  <input id="religious_restrictions" name="religious_restrictions" type="text" class="input" placeholder="List any restrictions..." />
+                </div>
+
+                <div>
+                  <label for="digestive_issues" class="label">Any digestive issues (bloating, IBS, reflux, etc.) that impact food choices?</label>
+                  <input id="digestive_issues" name="digestive_issues" type="text" class="input" placeholder="List any digestive issues..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 14: Cooking, Meal Prep, Budget, and Eating Out -->
+            <div class="card">
+              <div class="section-header">14) Cooking, Meal Prep, Budget, and Eating Out</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="meal_prep_days" class="label">How many days/week can you realistically cook or meal prep?</label>
+                  <input id="meal_prep_days" name="meal_prep_days" type="text" class="input" placeholder="e.g., 2-3 days" />
+                </div>
+
+                <div>
+                  <label for="cooking_setup" class="label">What cooking setup do you have? (full kitchen / limited / dorm / air fryer / microwave only)</label>
+                  <input id="cooking_setup" name="cooking_setup" type="text" class="input" placeholder="Describe your kitchen setup..." />
+                </div>
+
+                <div>
+                  <label for="cooking_confidence" class="label">How confident are you in cooking? (1–10)</label>
+                  <input id="cooking_confidence" name="cooking_confidence" type="number" class="input" placeholder="1-10" min="1" max="10" />
+                </div>
+
+                <div>
+                  <label class="label">Are you able to bring meals to work/school?</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="bring_meals" value="Yes (microwave access)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes (microwave access)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="bring_meals" value="Yes (no microwave)" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Yes (no microwave)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="bring_meals" value="No, I need restaurant/gas station options" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>No, I need restaurant/gas station options</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">How often do you eat out each week?</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="eat_out_frequency" value="0–2" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>0–2</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="eat_out_frequency" value="3–5" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3–5</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="eat_out_frequency" value="6+" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>6+</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="eat_out_places" class="label">Where do you eat out most? (fast food, sit-down, cafeteria, etc. list your common places)</label>
+                  <input id="eat_out_places" name="eat_out_places" type="text" class="input" placeholder="List common places..." />
+                </div>
+
+                <div>
+                  <label for="grocery_budget" class="label">What's your typical grocery budget per week? (rough number is fine)</label>
+                  <input id="grocery_budget" name="grocery_budget" type="text" class="input" placeholder="e.g., $100-150" />
+                </div>
+
+                <div>
+                  <label for="convenience_foods" class="label">Any "must-have" convenience foods you rely on (protein bars, shakes, frozen meals, etc.)?</label>
+                  <input id="convenience_foods" name="convenience_foods" type="text" class="input" placeholder="List convenience foods..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 15: Protein, Hunger, Cravings, and Trigger Foods -->
+            <div class="card">
+              <div class="section-header">15) Protein, Hunger, Cravings, and Trigger Foods</div>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="current_protein" class="label">How many grams of protein do you think you currently get per day? (if unknown, estimate)</label>
+                  <input id="current_protein" name="current_protein" type="text" class="input" placeholder="e.g., 120g" />
+                </div>
+
+                <div>
+                  <label for="protein_sources" class="label">What are your go-to protein sources right now?</label>
+                  <input id="protein_sources" name="protein_sources" type="text" class="input" placeholder="e.g., chicken, eggs, whey protein..." />
+                </div>
+
+                <div>
+                  <label class="label">How is your hunger most days?</label>
+                  <div class="flex flex-wrap gap-3 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="hunger_level" value="Low" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Low</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="hunger_level" value="Moderate" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Moderate</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="hunger_level" value="High" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>High</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="hunger_level" value="Very high / constant" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Very high / constant</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="cravings_worst" class="label">When are cravings worst? (night, afternoon, weekends, after stress, etc.)</label>
+                  <input id="cravings_worst" name="cravings_worst" type="text" class="input" placeholder="When do cravings hit hardest..." />
+                </div>
+
+                <div>
+                  <label for="trigger_foods" class="label">List any "trigger foods" you tend to overeat (chips, cereal, nut butter, ice cream, etc.)</label>
+                  <input id="trigger_foods" name="trigger_foods" type="text" class="input" placeholder="List trigger foods..." />
+                </div>
+
+                <div>
+                  <label for="struggle_situations" class="label">Biggest struggle foods/situations: (stress eating, social eating, boredom, etc.)</label>
+                  <input id="struggle_situations" name="struggle_situations" type="text" class="input" placeholder="Describe struggle situations..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 16: Hydration, Alcohol, Supplements -->
+            <div class="card">
+              <div class="section-header">16) Hydration, Alcohol, Supplements</div>
+              
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="water_intake" class="label">How much water do you drink per day? (estimate)</label>
+                    <input id="water_intake" name="water_intake" type="text" class="input" placeholder="e.g., 64 oz or 8 glasses" />
+                  </div>
+                  <div>
+                    <label for="caffeine_intake" class="label">How many caffeinated drinks per day? (coffee/energy drinks)</label>
+                    <input id="caffeine_intake" name="caffeine_intake" type="text" class="input" placeholder="e.g., 2 coffees" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label">Alcohol frequency</label>
+                  <div class="space-y-2 mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="alcohol_frequency" value="None" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>None</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="alcohol_frequency" value="1–2 drinks/week" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>1–2 drinks/week</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="alcohol_frequency" value="3–5 drinks/week" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>3–5 drinks/week</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="alcohol_frequency" value="Weekends heavy" class="w-4 h-4 text-accent focus:ring-accent" />
+                      <span>Weekends heavy</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="current_supplements" class="label">Supplements you currently take (and dosages if known)</label>
+                  <textarea id="current_supplements" name="current_supplements" rows="3" class="input" placeholder="List all supplements and dosages..."></textarea>
+                </div>
+
+                <div>
+                  <label for="supplements_refuse" class="label">Any supplements you refuse to take?</label>
+                  <input id="supplements_refuse" name="supplements_refuse" type="text" class="input" placeholder="List supplements you won't take..." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto text-lg px-8 py-4">Submit Questionnaire</button>
+              <p class="mt-4 text-sm text-slate-500" id="form-status" role="status" aria-live="polite"></p>
+              <div id="form-success" class="mt-4 hidden rounded-md border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 text-base">
+                ✓ Questionnaire submitted successfully! Thank you for the detailed information.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <div class="font-semibold text-slate-900">Angel Coaching</div>
+          <div class="text-xs text-slate-500">Science-led • Results-driven</div>
+        </div>
+      </div>
+      <div class="mt-8 text-xs text-slate-500">© 2025 Angel Coaching. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Form submission handler
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('in-depth-questionnaire-form');
+      const status = document.getElementById('form-status');
+      const success = document.getElementById('form-success');
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (status) status.textContent = 'Submitting...';
+        if (success) success.classList.add('hidden');
+
+        const formData = new FormData(form);
+        const payload = {};
+        
+        // Handle all form fields
+        for (let [key, value] of formData.entries()) {
+          if (payload[key]) {
+            // Handle multiple values (checkboxes)
+            if (Array.isArray(payload[key])) {
+              payload[key].push(value);
+            } else {
+              payload[key] = [payload[key], value];
+            }
+          } else {
+            payload[key] = value;
+          }
+        }
+
+        // Convert arrays to comma-separated strings
+        for (let key in payload) {
+          if (Array.isArray(payload[key])) {
+            payload[key] = payload[key].join(', ');
+          }
+        }
+
+        payload.page = window.location.href;
+
+        try {
+          const res = await fetch(form.action || '/api/in-depth-questionnaire', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || (data && data.success === false)) {
+            throw new Error(data?.message || 'Network error');
+          }
+
+          if (status) status.textContent = '';
+          if (success) {
+            success.classList.remove('hidden');
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          form.reset();
+        } catch (err) {
+          if (status) status.textContent = err?.message || 'Something went wrong. Please try again.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
