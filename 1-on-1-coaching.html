@@ -73,17 +73,19 @@
 
   <main id="main" tabindex="-1" class="outline-none">
     <!-- Hero Section -->
-    <section id="hero" class="relative isolate overflow-hidden scroll-mt-24">
+    <section id="hero" class="relative isolate overflow-visible scroll-mt-24">
       <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-slate-50"></div>
       <div class="absolute -left-10 top-10 h-64 w-64 rounded-full bg-sky-100 blur-3xl opacity-60"></div>
       <div class="absolute -right-24 -top-16 h-72 w-72 rounded-full bg-sky-200 blur-[120px] opacity-50"></div>
 
-      <div class="relative mx-auto max-w-7xl px-4 pt-20 pb-16 sm:px-6 md:pt-24 md:pb-20 lg:px-8">
+      <!-- Logo at the top, overlapping header -->
+      <div class="relative flex justify-center -mt-8 md:-mt-12 lg:-mt-16">
+        <img src="/images/logo.png" alt="Angel Coaching Logo" class="h-48 md:h-56 lg:h-64 xl:h-72 max-w-lg md:max-w-xl lg:max-w-2xl" />
+      </div>
+
+      <div class="relative mx-auto max-w-7xl px-4 pt-4 pb-16 sm:px-6 md:pt-6 md:pb-20 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
-          <div class="mb-4 flex justify-center">
-            <img src="/images/logo.png" alt="Angel Coaching Logo" class="h-48 md:h-56 lg:h-64 xl:h-72 max-w-lg md:max-w-xl lg:max-w-2xl mx-auto" />
-          </div>
-          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.05] mb-8">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.05] mb-8 -mt-8 md:-mt-12 lg:-mt-16">
             Transform Your Physique in <span class="text-accent">2026</span>
           </h1>
           <div class="mb-8 max-w-4xl mx-auto">
