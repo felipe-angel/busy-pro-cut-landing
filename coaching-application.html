@@ -162,42 +162,6 @@
               </div>
             </div>
 
-            <!-- Exercise Types -->
-            <div>
-              <label class="label">
-                What types of exercise do you currently do? (Select all that apply) <span class="text-red-500">*</span>
-              </label>
-              <div class="space-y-3 mt-2">
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="Weight Training" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>Weight Training</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="Cardio" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>Cardio</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="Yoga/Pilates" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>Yoga/Pilates</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="Sports" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>Sports</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="None" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>None</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-lg border border-slate-200 hover:border-accent/50 transition-colors">
-                  <input type="checkbox" name="exercise_types" value="Other" id="exercise-other-checkbox" class="w-4 h-4 text-accent focus:ring-accent" />
-                  <span>Other:</span>
-                </label>
-                <div id="exercise-other-input" class="hidden ml-7">
-                  <input type="text" name="exercise_other" class="input" placeholder="Please specify" />
-                </div>
-              </div>
-            </div>
-
             <!-- Experience Level -->
             <div>
               <label class="label">
@@ -223,30 +187,6 @@
               </div>
             </div>
 
-            <!-- Specific Goal -->
-            <div>
-              <label for="specific_goal" class="label">
-                Do you have a specific goal you want to meet (goal weight or strength) and if so do you have a timeline in mind? <span class="text-red-500">*</span>
-              </label>
-              <textarea id="specific_goal" name="specific_goal" rows="4" class="input" placeholder="Please describe your specific goals and timeline..." required></textarea>
-            </div>
-
-            <!-- Hardest Challenge -->
-            <div>
-              <label for="hardest_challenge" class="label">
-                What has been the hardest/most challenging thing in the past when it comes to meeting your fitness/health goal? <span class="text-red-500">*</span>
-              </label>
-              <textarea id="hardest_challenge" name="hardest_challenge" rows="4" class="input" placeholder="Please describe your challenges..." required></textarea>
-            </div>
-
-            <!-- Muscle Groups -->
-            <div>
-              <label for="muscle_groups" class="label">
-                Are there any muscle groups your lacking in or want to prioritize growth in? <span class="text-red-500">*</span>
-              </label>
-              <textarea id="muscle_groups" name="muscle_groups" rows="4" class="input" placeholder="Please list muscle groups you want to prioritize..." required></textarea>
-            </div>
-
             <!-- Employment Status -->
             <div>
               <label class="label">Are you employed?</label>
@@ -262,12 +202,12 @@
               </div>
             </div>
 
-            <!-- Phone -->
+            <!-- Contact -->
             <div>
-              <label for="phone" class="label">
-                Enter the best number to reach you: <span class="text-red-500">*</span>
+              <label for="contact" class="label">
+                Enter the best way to reach you (number, email, or Instagram): <span class="text-red-500">*</span>
               </label>
-              <input id="phone" name="phone" type="tel" class="input" placeholder="(555) 555-5555" autocomplete="tel" required />
+              <input id="contact" name="contact" type="text" class="input" placeholder="(555) 555-5555, you@example.com, or @username" autocomplete="tel" required />
             </div>
 
             <!-- Submit Button -->
@@ -307,24 +247,6 @@
   </footer>
 
   <script src="/script.js" defer></script>
-  <script>
-    // Show/hide "Other" exercise type input
-    document.addEventListener('DOMContentLoaded', function() {
-      const otherCheckbox = document.getElementById('exercise-other-checkbox');
-      const otherInput = document.getElementById('exercise-other-input');
-      if (otherCheckbox && otherInput) {
-        otherCheckbox.addEventListener('change', function() {
-          if (this.checked) {
-            otherInput.classList.remove('hidden');
-            otherInput.querySelector('input').focus();
-          } else {
-            otherInput.classList.add('hidden');
-            otherInput.querySelector('input').value = '';
-          }
-        });
-      }
-    });
-  </script>
 </body>
 </html>
 

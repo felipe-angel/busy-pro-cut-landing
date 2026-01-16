@@ -44,14 +44,13 @@ function doPost(e) {
     var gender = safe_(body.gender);
     var situation = safe_(body.situation);
     var primary_goal = safe_(body.primary_goal);
-    var exercise_types = safe_(body.exercise_types);
-    var exercise_other = safe_(body.exercise_other);
     var experience_level = safe_(body.experience_level);
-    var specific_goal = safe_(body.specific_goal);
-    var hardest_challenge = safe_(body.hardest_challenge);
-    var muscle_groups = safe_(body.muscle_groups);
     var employed = safe_(body.employed);
-    var phone = safe_(body.phone);
+    var contact = safe_(body.contact);
+    // Backward compatibility: if contact is empty, try phone
+    if (!contact || contact === '') {
+      contact = safe_(body.phone);
+    }
     var userAgent = safe_(body.userAgent);
     var referrer = safe_(body.referrer);
     var page = safe_(body.page);
@@ -70,14 +69,9 @@ function doPost(e) {
         'gender',
         'situation',
         'primary_goal',
-        'exercise_types',
-        'exercise_other',
         'experience_level',
-        'specific_goal',
-        'hardest_challenge',
-        'muscle_groups',
         'employed',
-        'phone',
+        'contact',
         'user_agent',
         'referrer',
         'page'
@@ -94,18 +88,54 @@ function doPost(e) {
       gender,
       situation,
       primary_goal,
-      exercise_types,
-      exercise_other,
       experience_level,
-      specific_goal,
-      hardest_challenge,
-      muscle_groups,
       employed,
-      phone,
+      contact,
       userAgent,
       referrer,
       page
     ]);
+
+    // Send email notification
+    try {
+      var notificationEmail = PropertiesService.getScriptProperties().getProperty('COACHING_NOTIFICATION_EMAIL');
+      if (notificationEmail) {
+        var subject = 'New Coaching Application: ' + name;
+        var emailBody = 'A new coaching application has been submitted:\n\n';
+        emailBody += 'Name: ' + name + '\n';
+        emailBody += 'Age: ' + age + '\n';
+        emailBody += 'Height: ' + height + '\n';
+        emailBody += 'Weight: ' + weight + '\n';
+        emailBody += 'Gender: ' + gender + '\n';
+        emailBody += 'Situation: ' + situation + '\n';
+        emailBody += 'Primary Goal: ' + primary_goal + '\n';
+        emailBody += 'Experience Level: ' + experience_level + '\n';
+        emailBody += 'Employed: ' + employed + '\n';
+        emailBody += 'Contact: ' + contact + '\n';
+        emailBody += 'Timestamp: ' + ts.toISOString() + '\n';
+        emailBody += 'Page: ' + page + '\n';
+        
+        // Try GmailApp first (better authorization), fallback to MailApp
+        try {
+          GmailApp.sendEmail(notificationEmail, subject, emailBody);
+          Logger.log('Email notification sent successfully via GmailApp to: ' + notificationEmail);
+        } catch (gmailError) {
+          // Fallback to MailApp if GmailApp fails
+          MailApp.sendEmail({
+            to: notificationEmail,
+            subject: subject,
+            body: emailBody
+          });
+          Logger.log('Email notification sent successfully via MailApp to: ' + notificationEmail);
+        }
+      } else {
+        Logger.log('COACHING_NOTIFICATION_EMAIL not set - skipping email notification');
+      }
+    } catch (emailError) {
+      // Log error but don't fail the request
+      Logger.log('Email notification error: ' + emailError.toString());
+      Logger.log('Error details: ' + JSON.stringify(emailError));
+    }
 
     return json_(200, { ok: true });
   } catch (err) {
@@ -127,6 +157,45 @@ function safe_(value) {
   if (value === null || value === undefined) return '';
   return String(value).trim();
 }
+
+// Test function to verify email notifications are working
+// Run this function manually from the Apps Script editor to test email sending
+function testEmailNotification() {
+  try {
+    var notificationEmail = PropertiesService.getScriptProperties().getProperty('COACHING_NOTIFICATION_EMAIL');
+    
+    if (!notificationEmail) {
+      Logger.log('ERROR: COACHING_NOTIFICATION_EMAIL not set in script properties');
+      return;
+    }
+    
+    Logger.log('Attempting to send test email to: ' + notificationEmail);
+    
+    // Try GmailApp first (better authorization), fallback to MailApp
+    try {
+      GmailApp.sendEmail(notificationEmail, 'Test Email - Coaching Application Webhook', 'This is a test email to verify email notifications are working.\n\nIf you received this, email sending is configured correctly!');
+      Logger.log('Test email sent successfully via GmailApp!');
+    } catch (gmailError) {
+      Logger.log('GmailApp failed, trying MailApp... Error: ' + gmailError.toString());
+      try {
+        MailApp.sendEmail({
+          to: notificationEmail,
+          subject: 'Test Email - Coaching Application Webhook',
+          body: 'This is a test email to verify email notifications are working.\n\nIf you received this, email sending is configured correctly!'
+        });
+        Logger.log('Test email sent successfully via MailApp!');
+      } catch (mailError) {
+        Logger.log('Both GmailApp and MailApp failed. Error: ' + mailError.toString());
+        throw mailError;
+      }
+    }
+  } catch (error) {
+    Logger.log('ERROR sending test email: ' + error.toString());
+    Logger.log('Full error: ' + JSON.stringify(error));
+  }
+}
+
+
 
 
 

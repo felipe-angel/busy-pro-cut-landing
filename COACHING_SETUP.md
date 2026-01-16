@@ -15,14 +15,9 @@ This site collects coaching applications via a comprehensive questionnaire form.
    - `gender`
    - `situation`
    - `primary_goal`
-   - `exercise_types`
-   - `exercise_other`
    - `experience_level`
-   - `specific_goal`
-   - `hardest_challenge`
-   - `muscle_groups`
    - `employed`
-   - `phone`
+   - `contact`
    - `user_agent`
    - `referrer`
    - `page`
@@ -53,6 +48,18 @@ In Apps Script:
 Then you must call the webhook with a query string:
 - `https://YOUR_WEB_APP_URL?secret=your-secret-here`
 
+## 3.5) (Optional) Set up email notifications
+
+To receive email alerts when someone submits a coaching application:
+
+1. In Apps Script, go to **Project Settings → Script properties**
+2. Add:
+   - `COACHING_NOTIFICATION_EMAIL` = `your-email@example.com`
+
+**Important:** The email address must be the same Google account that owns the Apps Script project, or you need to grant the script permission to send emails on your behalf.
+
+When a new application is submitted, you'll receive an email with all the form details.
+
 ## 4) Set Vercel environment variable
 
 In Vercel → Project → Settings → Environment Variables, set:
@@ -71,10 +78,14 @@ Deploy again after setting the env var.
 ## Form Fields
 
 The form collects the following information:
-- **Required fields**: Name, Gender, Situation, Primary Goal, Exercise Types, Experience Level, Specific Goal, Hardest Challenge, Muscle Groups, Phone
-- **Optional fields**: Age, Height, Weight, Employment Status, Exercise Other (if "Other" is selected)
+- **Required fields**: Name, Gender, Situation, Primary Goal, Experience Level, Contact (phone number, email, or Instagram handle)
+- **Optional fields**: Age, Height, Weight, Employment Status
+
+**Contact Field:** Users can enter their phone number, email address, or Instagram handle (e.g., `@username`). The form validates that the input matches one of these formats.
 
 All submissions are timestamped and include user agent, referrer, and page URL for tracking purposes.
+
+
 
 
 

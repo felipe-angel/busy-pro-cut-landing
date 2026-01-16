@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fat Loss Quiz (2 Minutes) — Angel Coaching</title>
+  <meta name="description" content="Take our 2-minute fat loss quiz to get your personalized score, discover what's holding you back, and receive a custom 7-day plan." />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/brand.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { screens: { 'xs': '420px' } } } }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9BEFXBGF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9BEFXBGF1', { debug_mode: true });
+  </script>
+
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    html:focus-within { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html:focus-within { scroll-behavior: auto; } }
+
+    /* Quiz-specific styles */
+    .quiz-container {
+      min-height: 400px;
+    }
+
+    .quiz-question {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .quiz-question.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border: 2px solid rgba(2, 6, 23, 0.1);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 150ms ease;
+      background: #fff;
+    }
+
+    .quiz-option:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+      background: rgba(14, 165, 233, 0.03);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--accent);
+      background: rgba(14, 165, 233, 0.08);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+    }
+
+    .quiz-option input[type="radio"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      accent-color: var(--accent);
+    }
+
+    .quiz-option span {
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(14, 165, 233, 0.15);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-600));
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+
+    .result-score {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-600));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .goal-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(14, 165, 233, 0.05);
+      border-radius: 0.75rem;
+      border: 1px solid rgba(14, 165, 233, 0.15);
+    }
+
+    .goal-checkbox input[type="checkbox"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-top: 0.125rem;
+      accent-color: var(--accent);
+    }
+
+    #results-section {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    #results-section.active {
+      display: block;
+    }
+
+    #quiz-section.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body id="top" class="min-h-screen bg-white text-slate-800 antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header id="site-header" class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center" aria-label="Angel Coaching home">
+          <img src="/images/logo.png" alt="Angel Coaching Logo" class="h-28 md:h-32" />
+        </a>
+        <nav class="hidden md:flex items-center gap-3 text-sm font-medium" aria-label="Primary">
+          <a class="btn btn-ghost px-3 py-2 text-sm font-semibold" href="/fat-loss.html">Fat Loss &amp; Training Blueprint</a>
+          <a class="btn btn-primary px-3 py-2 text-sm font-semibold" href="/coaching-application.html">Coaching Application</a>
+        </nav>
+        <button id="mobile-menu-button" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white" role="dialog" aria-label="Mobile menu">
+      <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6">
+        <div class="flex flex-col gap-2">
+          <a class="btn btn-ghost px-3 py-2 text-sm font-semibold justify-center text-center" href="/fat-loss.html">Fat Loss &amp; Training Blueprint</a>
+          <a class="btn btn-primary px-3 py-2 text-sm font-semibold justify-center text-center" href="/coaching-application.html">Coaching Application</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="outline-none">
+    <!-- Quiz Section -->
+    <section id="quiz-section" class="section">
+      <div class="section-inner">
+        <div class="max-w-2xl mx-auto">
+          <!-- Quiz Header -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm font-semibold text-accent mb-4">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              2 Minutes
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-3">
+              Fat Loss Quiz
+            </h1>
+            <p class="text-lg text-slate-600">
+              Get your personalized score, discover what's holding you back, and receive your 7-day fix.
+            </p>
+          </div>
+
+          <!-- Progress -->
+          <div class="mb-8">
+            <div class="flex justify-between text-sm text-slate-600 mb-2">
+              <span>Question <span id="current-question">1</span> of 10</span>
+              <span id="progress-percent">10%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill" style="width: 10%"></div>
+            </div>
+          </div>
+
+          <!-- Quiz Container -->
+          <div class="card quiz-container">
+            <!-- Q1 - Goal (Not Scored) -->
+            <div class="quiz-question active" data-question="1">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">What do you want most right now?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="A">
+                  <span>Lose 15–40+ lbs of fat</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="B">
+                  <span>Lose fat + build muscle</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="C">
+                  <span>Build muscle (already fairly lean)</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="D">
+                  <span>Get consistent and feel better first</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q2 - Training Frequency (Scored) -->
+            <div class="quiz-question" data-question="2" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">How many days/week can you realistically train most weeks?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="A" data-points="0">
+                  <span>0–1 days</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="B" data-points="4">
+                  <span>2 days</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="C" data-points="8">
+                  <span>3 days</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="D" data-points="10">
+                  <span>4+ days</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q3 - Workout Time (Scored) -->
+            <div class="quiz-question" data-question="3" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">How much time can you reliably give per workout?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="A" data-points="3">
+                  <span>20 minutes</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="B" data-points="6">
+                  <span>30 minutes</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="C" data-points="9">
+                  <span>45 minutes</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="D" data-points="10">
+                  <span>60+ minutes</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q4 - Steps (Scored) -->
+            <div class="quiz-question" data-question="4" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">What's your average daily step count?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="A" data-points="0">
+                  <span>Under 4,000</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="B" data-points="4">
+                  <span>4,000–6,000</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="C" data-points="7">
+                  <span>6,000–8,000</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="D" data-points="10">
+                  <span>8,000+</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q5 - Sleep (Scored) -->
+            <div class="quiz-question" data-question="5" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">Average sleep on work nights?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q5" value="A" data-points="0">
+                  <span>Under 6 hours</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q5" value="B" data-points="5">
+                  <span>6–6.9 hours</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q5" value="C" data-points="9">
+                  <span>7–7.9 hours</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q5" value="D" data-points="10">
+                  <span>8+ hours</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q6 - Eating Out/Alcohol (Scored) -->
+            <div class="quiz-question" data-question="6" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">How many days/week do you eat out or drink alcohol?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q6" value="A" data-points="0">
+                  <span>4+ days</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q6" value="B" data-points="4">
+                  <span>2–3 days</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q6" value="C" data-points="7">
+                  <span>1 day</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q6" value="D" data-points="10">
+                  <span>0 days</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q7 - Protein Consistency (Scored) -->
+            <div class="quiz-question" data-question="7" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">How many meals per day have a clear protein source?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q7" value="A" data-points="0">
+                  <span>0–1 meals</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q7" value="B" data-points="6">
+                  <span>2 meals</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q7" value="C" data-points="10">
+                  <span>3+ meals</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q8 - Consistency Method (Scored) -->
+            <div class="quiz-question" data-question="8" data-scored="true">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">Which best describes you right now?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q8" value="A" data-points="0">
+                  <span>I won't track anything</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q8" value="B" data-points="6">
+                  <span>I'll follow simple rules / hand portions</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q8" value="C" data-points="8">
+                  <span>I'll track 3–4 days/week</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q8" value="D" data-points="10">
+                  <span>I'll track daily for 2–4 weeks to dial it in</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q9 - Main Derailer (Not Scored - Persona Driver) -->
+            <div class="quiz-question" data-question="9">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">What usually ruins your progress?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q9" value="A">
+                  <span>Late-night stress eating / cravings</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q9" value="B">
+                  <span>Weekends (restaurants, alcohol, snacks)</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q9" value="C">
+                  <span>Travel / work events</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q9" value="D">
+                  <span>Inconsistent workouts (start/stop)</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q9" value="E">
+                  <span>Portions / "eating healthy" but too much</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q10 - Timeline (Not Scored - CTA Intensity) -->
+            <div class="quiz-question" data-question="10">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">How soon do you want visible results?</h2>
+              <div class="space-y-3">
+                <label class="quiz-option">
+                  <input type="radio" name="q10" value="A">
+                  <span>ASAP (next 30 days)</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q10" value="B">
+                  <span>Next 2–3 months</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q10" value="C">
+                  <span>"Someday" / no rush</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-8 pt-6 border-t border-slate-200">
+              <button id="prev-btn" class="btn btn-ghost px-6 py-3 hidden">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Back
+              </button>
+              <button id="next-btn" class="btn btn-primary px-8 py-3 ml-auto" disabled>
+                Next
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results-section" class="section">
+      <div class="section-inner">
+        <div class="max-w-3xl mx-auto">
+          <!-- Score Header -->
+          <div class="text-center mb-10">
+            <p class="text-sm font-semibold text-accent uppercase tracking-wide mb-2">Your Results</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Your Fat Loss Score</h2>
+            <div class="result-score" id="score-display">0</div>
+            <p class="text-lg text-slate-600">/100</p>
+          </div>
+
+          <!-- Persona Card -->
+          <div class="card mb-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <div>
+                <p class="text-sm text-slate-500">Your #1 bottleneck</p>
+                <h3 class="text-xl font-bold text-slate-900" id="persona-name">Loading...</h3>
+              </div>
+            </div>
+            <p class="text-slate-600" id="persona-diagnosis">Loading diagnosis...</p>
+          </div>
+
+          <!-- 7-Day Fix -->
+          <div class="card mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Your 7-Day Fix</h3>
+            <div class="space-y-4" id="seven-day-fix">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Goals -->
+          <div class="card mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Your 2 Goals This Week</h3>
+            <div class="space-y-3" id="goals-container">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- CTA Section -->
+          <div class="card bg-gradient-to-br from-sky-50 to-white border-accent/20">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-slate-900 mb-3">Want more than just the next 7 days?</h3>
+              <p class="text-slate-600 mb-6">
+                If you want me to map your next 90 days (training split + calorie/protein target + weekly goals) and keep you accountable so you actually follow through, book a call.
+              </p>
+              <ul class="text-left max-w-md mx-auto space-y-3 mb-8">
+                <li class="flex items-start gap-3">
+                  <span class="text-accent text-lg font-bold mt-0.5">✓</span>
+                  <span class="text-slate-700">Your exact weekly training plan based on your schedule</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-accent text-lg font-bold mt-0.5">✓</span>
+                  <span class="text-slate-700">Your starting nutrition targets and the simplest structure to follow</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-accent text-lg font-bold mt-0.5">✓</span>
+                  <span class="text-slate-700">Your bottleneck strategy (weekends, stress eating, travel, etc.)</span>
+                </li>
+              </ul>
+              <a href="/coaching-application.html" class="btn btn-primary text-lg px-8 py-4">
+                Book a Call
+              </a>
+              <p class="mt-4 text-sm text-slate-500">
+                Best for busy men who want visible fat loss in the next 2–3 months.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <div class="font-semibold text-slate-900">Angel Coaching</div>
+          <div class="text-xs text-slate-500">Science-led • Results-driven</div>
+        </div>
+        <nav class="flex items-center gap-5 text-sm text-slate-600" aria-label="Footer">
+          <a href="/" class="hover:text-slate-900">Home</a>
+          <a href="/fat-loss.html" class="hover:text-slate-900">Fat Loss &amp; Training Blueprint</a>
+          <a href="/coaching-application.html" class="hover:text-slate-900">Coaching Application</a>
+          <a href="https://www.instagram.com/angel_coaching1/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900" aria-label="Follow us on Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </nav>
+      </div>
+      <div class="mt-8 text-xs text-slate-500">© 2025 Angel Coaching. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="/script.js" defer></script>
+  <script>
+    // Quiz State
+    let currentQuestion = 1;
+    const totalQuestions = 10;
+    const answers = {};
+
+    // DOM Elements
+    const questions = document.querySelectorAll('.quiz-question');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const currentQuestionEl = document.getElementById('current-question');
+    const progressPercent = document.getElementById('progress-percent');
+    const progressFill = document.getElementById('progress-fill');
+    const quizSection = document.getElementById('quiz-section');
+    const resultsSection = document.getElementById('results-section');
+
+    // Persona Data
+    const personaData = {
+      'stress-eating': {
+        name: 'Stress-Eating Executive',
+        diagnosis: "You're not failing because you don't 'know what to do.' You're stalling because stress + fatigue are driving nighttime calories and inconsistent choices.",
+        levels: {
+          foundation: {
+            fix: [
+              { label: 'Training', text: '2–3 workouts (30–45 min). Minimum effective dose.' },
+              { label: 'Nutrition', text: 'Protein-first at every meal; no "random snacking."' },
+              { label: 'Lifestyle', text: 'Steps up + a hard stop on night eating.' }
+            ],
+            goals: [
+              'Hit 6,000 steps/day',
+              'No food after dinner on 5/7 nights (herbal tea / zero-cal option allowed)'
+            ]
+          },
+          dialIn: {
+            fix: [
+              { label: 'Training', text: '3 workouts. Same plan all week.' },
+              { label: 'Nutrition', text: 'Protein anchor + one planned "stress snack."' },
+              { label: 'Lifestyle', text: 'Sleep leverage to reduce cravings.' }
+            ],
+            goals: [
+              'Hit 7,500 steps/day',
+              'Replace late-night snacking with a planned protein option (ex: Greek yogurt/protein shake) 5/7 nights'
+            ]
+          },
+          acceleration: {
+            fix: [
+              { label: 'Training', text: '3–4 workouts; push progressive overload on 2 lifts.' },
+              { label: 'Nutrition', text: 'Keep calories tight Mon–Thu, flexible but controlled Fri–Sun.' },
+              { label: 'Lifestyle', text: 'Sleep consistency = appetite control.' }
+            ],
+            goals: [
+              '8,500–10,000 steps/day',
+              'Zero "unplanned" night snacks for 7 days (if hungry: planned protein only)'
+            ]
+          }
+        }
+      },
+      'weekend-warrior': {
+        name: 'Weekend Warrior',
+        diagnosis: "Your weekdays are fine. Weekends erase the deficit. You don't need perfection—just a weekend structure.",
+        levels: {
+          foundation: {
+            fix: [
+              { label: 'Training', text: '2–3 workouts (get the reps in).' },
+              { label: 'Nutrition', text: 'Weekdays simple; weekends "rails."' },
+              { label: 'Lifestyle', text: 'Steps increase on weekend days.' }
+            ],
+            goals: [
+              'Hit 6,500 steps/day',
+              'Choose one: either alcohol OR dessert (not both) on weekend nights'
+            ]
+          },
+          dialIn: {
+            fix: [
+              { label: 'Training', text: '3 workouts + 1 optional short pump/cardio day.' },
+              { label: 'Nutrition', text: 'Protein at every meal + "one plate rule" eating out.' },
+              { label: 'Lifestyle', text: 'Weekend movement.' }
+            ],
+            goals: [
+              'Hit 8,000 steps/day (weekends included)',
+              'If eating out: protein + veggie first, and stop at 80% full (2 meals minimum this week)'
+            ]
+          },
+          acceleration: {
+            fix: [
+              { label: 'Training', text: '4 workouts OR 3 workouts + 2 cardio sessions.' },
+              { label: 'Nutrition', text: 'Weekend calories capped with a strategy (pre-plan).' },
+              { label: 'Lifestyle', text: 'Alcohol cap.' }
+            ],
+            goals: [
+              'Hit 9,000–11,000 steps/day',
+              'Weekend rule: Max 3 drinks total OR two restaurant meals total (pick one cap)'
+            ]
+          }
+        }
+      },
+      'travel-operator': {
+        name: 'Travel / Event Operator',
+        diagnosis: "Your plan doesn't survive real life (travel, work dinners, events). You need a 'portable' structure, not motivation.",
+        levels: {
+          foundation: {
+            fix: [
+              { label: 'Training', text: '2–3 workouts with a "hotel backup" option.' },
+              { label: 'Nutrition', text: 'Protein + produce every meal.' },
+              { label: 'Lifestyle', text: 'Steps are your travel weapon.' }
+            ],
+            goals: [
+              'Hit 7,000 steps/day (even on travel days)',
+              'Eat a palm-size protein at 2 meals/day minimum'
+            ]
+          },
+          dialIn: {
+            fix: [
+              { label: 'Training', text: '3 workouts + 1 short hotel session if needed.' },
+              { label: 'Nutrition', text: 'Restaurant ordering framework (lean protein + carb + veg).' },
+              { label: 'Lifestyle', text: '"No liquid calories" on workdays.' }
+            ],
+            goals: [
+              'Hit 8,000 steps/day',
+              '1 restaurant meal/day max (unless it\'s unavoidable—then apply the ordering rules)'
+            ]
+          },
+          acceleration: {
+            fix: [
+              { label: 'Training', text: '3–4 workouts, maintain progression.' },
+              { label: 'Nutrition', text: 'Travel day playbook + macros structure.' },
+              { label: 'Lifestyle', text: 'Keep sleep + hydration tight.' }
+            ],
+            goals: [
+              'Hit 9,000–10,000 steps/day',
+              'For every restaurant meal: lean protein + veg, carbs measured (no "double carb + dessert" combo)'
+            ]
+          }
+        }
+      },
+      'start-stop': {
+        name: 'Start-Stop Lifter',
+        diagnosis: "You don't need a 'better program.' You need a plan that's so simple you can execute it even when life gets busy.",
+        levels: {
+          foundation: {
+            fix: [
+              { label: 'Training', text: '2 workouts minimum. Full-body. Simple exercises.' },
+              { label: 'Nutrition', text: 'Two default meals you repeat.' },
+              { label: 'Lifestyle', text: 'Make consistency automatic.' }
+            ],
+            goals: [
+              'Complete 2 workouts this week (non-negotiable)',
+              'Eat one repeatable high-protein breakfast 5/7 days'
+            ]
+          },
+          dialIn: {
+            fix: [
+              { label: 'Training', text: '3 workouts; same days each week.' },
+              { label: 'Nutrition', text: 'Protein target + basic structure.' },
+              { label: 'Lifestyle', text: 'Steps baseline.' }
+            ],
+            goals: [
+              'Complete 3 workouts this week (schedule them now)',
+              'Hit 7,500 steps/day'
+            ]
+          },
+          acceleration: {
+            fix: [
+              { label: 'Training', text: '4 workouts or 3 + cardio. Track progression.' },
+              { label: 'Nutrition', text: 'Track 4–7 days to lock in targets.' },
+              { label: 'Lifestyle', text: 'Tighten the "small leaks."' }
+            ],
+            goals: [
+              'Complete 4 training sessions (or 3 + 2 cardio)',
+              'Track food 5/7 days (or hand-portion rules perfectly 7/7)'
+            ]
+          }
+        }
+      },
+      'portion-blind': {
+        name: 'Portion Blind Spot',
+        diagnosis: "You're probably eating 'pretty healthy'—but your portions (or liquid calories) keep you out of a deficit.",
+        levels: {
+          foundation: {
+            fix: [
+              { label: 'Training', text: '2–3 workouts.' },
+              { label: 'Nutrition', text: 'Portion rules (no tracking required).' },
+              { label: 'Lifestyle', text: 'Steps up.' }
+            ],
+            goals: [
+              'Protein + veggie first at lunch and dinner for 7 days',
+              'No liquid calories (sodas/juice/sugary coffee) for 7 days'
+            ]
+          },
+          dialIn: {
+            fix: [
+              { label: 'Training', text: '3 workouts.' },
+              { label: 'Nutrition', text: 'Portion structure + one controlled treat window.' },
+              { label: 'Lifestyle', text: 'Steps baseline.' }
+            ],
+            goals: [
+              'Hit 8,000 steps/day',
+              'Use the hand-portion method for 2 meals/day (palm protein, fist carbs, thumb fats)'
+            ]
+          },
+          acceleration: {
+            fix: [
+              { label: 'Training', text: '3–4 workouts + progression.' },
+              { label: 'Nutrition', text: 'Either track 5/7 days or follow strict portion rules.' },
+              { label: 'Lifestyle', text: 'Keep weekends controlled.' }
+            ],
+            goals: [
+              'Track food 5/7 days OR hand-portion rules 7/7 days',
+              'Limit eating out to 2 meals total this week (or apply ordering rules every time)'
+            ]
+          }
+        }
+      }
+    };
+
+    // Initialize quiz
+    function init() {
+      // Add click handlers to all options
+      document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const radio = this.querySelector('input[type="radio"]');
+          const questionNum = this.closest('.quiz-question').dataset.question;
+          
+          // Remove selected class from siblings
+          this.closest('.quiz-question').querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          
+          // Add selected class
+          this.classList.add('selected');
+          radio.checked = true;
+          
+          // Store answer
+          answers[`q${questionNum}`] = radio.value;
+          
+          // Store points if scored question
+          if (radio.dataset.points !== undefined) {
+            answers[`q${questionNum}_points`] = parseInt(radio.dataset.points);
+          }
+          
+          // Enable next button
+          nextBtn.disabled = false;
+        });
+      });
+
+      // Navigation handlers
+      prevBtn.addEventListener('click', goToPrevious);
+      nextBtn.addEventListener('click', goToNext);
+
+      updateUI();
+    }
+
+    function updateUI() {
+      // Update progress
+      const percent = Math.round((currentQuestion / totalQuestions) * 100);
+      currentQuestionEl.textContent = currentQuestion;
+      progressPercent.textContent = `${percent}%`;
+      progressFill.style.width = `${percent}%`;
+
+      // Show/hide questions
+      questions.forEach((q, i) => {
+        q.classList.toggle('active', i + 1 === currentQuestion);
+      });
+
+      // Show/hide prev button
+      prevBtn.classList.toggle('hidden', currentQuestion === 1);
+
+      // Update next button text
+      if (currentQuestion === totalQuestions) {
+        nextBtn.innerHTML = 'See My Results <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+      } else {
+        nextBtn.innerHTML = 'Next <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+      }
+
+      // Check if current question has been answered
+      const currentAnswer = answers[`q${currentQuestion}`];
+      nextBtn.disabled = !currentAnswer;
+    }
+
+    function goToPrevious() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        updateUI();
+      }
+    }
+
+    function goToNext() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        updateUI();
+      } else {
+        // Calculate and show results
+        showResults();
+      }
+    }
+
+    function calculateScore() {
+      // Sum points from Q2-Q8 (max 70)
+      let totalPoints = 0;
+      for (let i = 2; i <= 8; i++) {
+        totalPoints += answers[`q${i}_points`] || 0;
+      }
+      // Convert to 0-100 scale
+      return Math.round((totalPoints / 70) * 100);
+    }
+
+    function getScoreLevel(score) {
+      if (score <= 39) return 'foundation';
+      if (score <= 69) return 'dialIn';
+      return 'acceleration';
+    }
+
+    function determinePersona() {
+      const q2 = answers.q2; // Training frequency
+      const q5 = answers.q5; // Sleep
+      const q6 = answers.q6; // Eating out/alcohol
+      const q9 = answers.q9; // Main derailer
+
+      // Tie-break overrides
+      // If sleep under 6 (Q5A) → Stress-Eating Executive
+      if (q5 === 'A') {
+        return 'stress-eating';
+      }
+
+      // If 2+ eating out/drinking (Q6A/B) and Q9 isn't A → Weekend Warrior
+      if ((q6 === 'A' || q6 === 'B') && q9 !== 'A') {
+        return 'weekend-warrior';
+      }
+
+      // Primary persona from Q9
+      const personaMap = {
+        'A': 'stress-eating',
+        'B': 'weekend-warrior',
+        'C': 'travel-operator',
+        'D': 'start-stop',
+        'E': 'portion-blind'
+      };
+
+      return personaMap[q9] || 'stress-eating';
+    }
+
+    function showResults() {
+      const score = calculateScore();
+      const level = getScoreLevel(score);
+      const personaKey = determinePersona();
+      const persona = personaData[personaKey];
+      const levelData = persona.levels[level];
+
+      // Hide quiz, show results
+      quizSection.classList.add('hidden');
+      resultsSection.classList.add('active');
+
+      // Animate score
+      animateScore(score);
+
+      // Populate persona
+      document.getElementById('persona-name').textContent = persona.name;
+      document.getElementById('persona-diagnosis').textContent = persona.diagnosis;
+
+      // Populate 7-day fix
+      const fixContainer = document.getElementById('seven-day-fix');
+      fixContainer.innerHTML = levelData.fix.map(item => `
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-24 text-sm font-semibold text-accent">${item.label}</div>
+          <p class="text-slate-700">${item.text}</p>
+        </div>
+      `).join('');
+
+      // Populate goals
+      const goalsContainer = document.getElementById('goals-container');
+      goalsContainer.innerHTML = levelData.goals.map(goal => `
+        <label class="goal-checkbox cursor-pointer">
+          <input type="checkbox">
+          <span class="text-slate-700">${goal}</span>
+        </label>
+      `).join('');
+
+      // Scroll to top of results
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function animateScore(targetScore) {
+      const scoreEl = document.getElementById('score-display');
+      let current = 0;
+      const duration = 1500;
+      const increment = targetScore / (duration / 16);
+
+      const animate = () => {
+        current += increment;
+        if (current >= targetScore) {
+          scoreEl.textContent = targetScore;
+        } else {
+          scoreEl.textContent = Math.round(current);
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

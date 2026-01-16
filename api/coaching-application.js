@@ -20,14 +20,9 @@ module.exports = async function handler(req, res) {
     gender,
     situation,
     primary_goal,
-    exercise_types,
-    exercise_other,
     experience_level,
-    specific_goal,
-    hardest_challenge,
-    muscle_groups,
     employed,
-    phone,
+    contact,
     page,
   } = body || {};
 
@@ -44,43 +39,27 @@ module.exports = async function handler(req, res) {
   if (!primary_goal) {
     return res.status(400).json({ success: false, message: 'Primary goal is required' });
   }
-  if (!exercise_types || (Array.isArray(exercise_types) && exercise_types.length === 0)) {
-    return res.status(400).json({ success: false, message: 'At least one exercise type is required' });
-  }
   if (!experience_level) {
     return res.status(400).json({ success: false, message: 'Experience level is required' });
   }
-  if (!specific_goal || !specific_goal.trim()) {
-    return res.status(400).json({ success: false, message: 'Specific goal is required' });
-  }
-  if (!hardest_challenge || !hardest_challenge.trim()) {
-    return res.status(400).json({ success: false, message: 'Hardest challenge is required' });
-  }
-  if (!muscle_groups || !muscle_groups.trim()) {
-    return res.status(400).json({ success: false, message: 'Muscle groups to prioritize is required' });
-  }
-  if (!phone || !phone.trim()) {
-    return res.status(400).json({ success: false, message: 'Phone number is required' });
+  if (!contact || !contact.trim()) {
+    return res.status(400).json({ success: false, message: 'Contact information is required' });
   }
 
-  // Validate phone number
-  const normalizedPhone = String(phone || '').trim();
-  if (normalizedPhone.replace(/\D/g, '').length < 7) {
-    return res.status(400).json({ success: false, message: 'Please enter a valid phone number' });
+  // Validate contact (phone, email, or Instagram)
+  const normalizedContact = String(contact || '').trim();
+  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedContact);
+  const isInstagram = /^@?[a-zA-Z0-9._]+$/.test(normalizedContact.replace(/^@/, ''));
+  const isPhone = normalizedContact.replace(/\D/g, '').length >= 7;
+  
+  if (!isEmail && !isInstagram && !isPhone) {
+    return res.status(400).json({ success: false, message: 'Please enter a valid phone number, email, or Instagram handle' });
   }
 
   try {
     const coachingWebhookUrl = process.env.COACHING_WEBHOOK_URL;
     if (!coachingWebhookUrl) {
       return res.status(500).json({ success: false, message: 'Server not configured' });
-    }
-
-    // Format exercise_types as array (handle both array and single value)
-    let exerciseTypesArray = [];
-    if (Array.isArray(exercise_types)) {
-      exerciseTypesArray = exercise_types;
-    } else if (exercise_types) {
-      exerciseTypesArray = [exercise_types];
     }
 
     const payload = {
@@ -92,14 +71,9 @@ module.exports = async function handler(req, res) {
       gender: (gender || '').trim(),
       situation: (situation || '').trim(),
       primary_goal: (primary_goal || '').trim(),
-      exercise_types: exerciseTypesArray.join(', '),
-      exercise_other: (exercise_other || '').trim(),
       experience_level: (experience_level || '').trim(),
-      specific_goal: (specific_goal || '').trim(),
-      hardest_challenge: (hardest_challenge || '').trim(),
-      muscle_groups: (muscle_groups || '').trim(),
       employed: (employed || '').trim(),
-      phone: normalizedPhone,
+      contact: normalizedContact,
       userAgent: req.headers['user-agent'] || '',
       referrer: req.headers['referer'] || '',
       page: String(page || req.headers['referer'] || '').trim(),
@@ -141,6 +115,8 @@ function readJson(req) {
     req.on('error', reject);
   });
 }
+
+
 
 
 

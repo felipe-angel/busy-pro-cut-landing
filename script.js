@@ -135,14 +135,9 @@ function initForm() {
           gender: formData.get('gender') || '',
           situation: formData.get('situation') || '',
           primary_goal: formData.get('primary_goal') || '',
-          exercise_types: formData.getAll('exercise_types'),
-          exercise_other: formData.get('exercise_other') || '',
           experience_level: formData.get('experience_level') || '',
-          specific_goal: formData.get('specific_goal') || '',
-          hardest_challenge: formData.get('hardest_challenge') || '',
-          muscle_groups: formData.get('muscle_groups') || '',
           employed: formData.get('employed') || '',
-          phone: formData.get('phone') || '',
+          contact: formData.get('contact') || '',
           page: window.location.href,
         };
 
