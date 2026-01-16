@@ -1,7 +1,9 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/fat-loss.html", "destination": "/free-blueprints.html", "permanent": true },
+    { "source": "/fat-loss", "destination": "/free-blueprints.html", "permanent": true }
   ],
   "headers": [
     {
@@ -22,7 +24,8 @@
     { "source": "/1-on-1-coaching", "destination": "/1-on-1-coaching.html" },
     { "source": "/in-depth-questionnaire", "destination": "/in-depth-questionnaire.html" },
     { "source": "/quiz", "destination": "/quiz.html" },
-    { "source": "/free-workout", "destination": "/free-workout.html" }
+    { "source": "/free-workout", "destination": "/free-workout.html" },
+    { "source": "/free-blueprints", "destination": "/free-blueprints.html" }
   ]
 }
 
