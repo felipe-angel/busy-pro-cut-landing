@@ -211,3 +211,189 @@ body {
 .accordion-button[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
 .accordion-icon { transition: transform 150ms ease; color: var(--muted-ink); }
 .accordion-panel { padding: 0.5rem 0 1rem 0; color: var(--muted-ink); }
+
+/* ===== COACHING PAGE ENHANCEMENTS ===== */
+
+/* Pulse animation for CTA buttons */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4), 0 2px 4px rgba(14, 165, 233, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.6), 0 2px 8px rgba(14, 165, 233, 0.4), 0 0 30px rgba(14, 165, 233, 0.3);
+  }
+}
+
+.btn-primary.pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+  background: #fff;
+  border-radius: 1rem;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.125rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-600), #10b981);
+  z-index: -1;
+}
+
+/* Glow effect for images */
+.glow-effect {
+  box-shadow: 0 0 30px rgba(14, 165, 233, 0.3), 0 0 60px rgba(14, 165, 233, 0.15);
+}
+
+/* Animated gradient text */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-text-animated {
+  background: linear-gradient(90deg, var(--accent), #10b981, var(--accent-600), var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* Enhanced card with gradient hover */
+.card-feature {
+  background: #fff;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(2, 6, 23, 0.05), 0 4px 12px rgba(2, 6, 23, 0.08);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.card-feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(16, 185, 129, 0.05));
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.card-feature:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.12), 0 24px 48px rgba(2, 6, 23, 0.1);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+.card-feature:hover::before {
+  opacity: 1;
+}
+
+/* Icon container with gradient */
+.icon-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(14, 165, 233, 0.05));
+  color: var(--accent);
+  transition: all 300ms ease;
+}
+.card-feature:hover .icon-box {
+  background: linear-gradient(135deg, var(--accent), var(--accent-600));
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Transformation card styling */
+.transform-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  transition: all 300ms ease;
+}
+.transform-card.highlight {
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, var(--accent), #10b981) border-box;
+}
+.transform-card.highlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(16, 185, 129, 0.05));
+  pointer-events: none;
+}
+
+/* Result badge overlay */
+.result-badge {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Arrow connector */
+.arrow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+.arrow-connector svg {
+  filter: drop-shadow(0 2px 4px rgba(14, 165, 233, 0.3));
+}
+
+/* Left border cards */
+.card-bordered-left {
+  border-left: 4px solid;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(2, 6, 23, 0.05), 0 4px 12px rgba(2, 6, 23, 0.06);
+}
+.card-bordered-left.border-green {
+  border-left-color: #10b981;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.05), transparent 30%);
+}
+.card-bordered-left.border-red {
+  border-left-color: #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.05), transparent 30%);
+}
+
+/* Trust indicator pill */
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #059669;
+}
+.trust-pill .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #10b981;
+  border-radius: 9999px;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
